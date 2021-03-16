@@ -14,17 +14,24 @@ const chunk = require(`lodash/chunk`)
 exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
+  // const products = await getProducts(gatsbyUtilities)
+
 
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
     return
   }
 
-  // If there are posts, create pages for them
+  // If there are posts/products, create pages for them
   await createIndividualBlogPostPages({ posts, gatsbyUtilities })
+  // await createIndividualProductPages({ products, gatsbyUtilities })
 
-  // And a paginated archive
-  await createBlogPostArchive({ posts, gatsbyUtilities })
+  // And a paginated archive for each
+  await createBlogPostArchive({ posts, gatsbyUtilities }) 
+  // await createProductArchive({ products, gatsbyUtilities }) 
+
+
+
 }
 
 /**
@@ -38,7 +45,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: post.uri,
+        path: `/kitchen-knife-101${post.uri}`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/blog-post.js`),
@@ -60,7 +67,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
   )
 
 /**
- * This function creates all the individual blog pages in this site
+ * This function creates creates the blog post archive
  */
 async function createBlogPostArchive({ posts, gatsbyUtilities }) {
   const graphqlResult = await gatsbyUtilities.graphql(/* GraphQL */ `
@@ -88,7 +95,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/` : `/blog/${page}`
+          return page === 1 ? `/kitchen-knife-101` : `/kitchen-knife-101/${page}`
         }
 
         return null
@@ -120,6 +127,97 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
     })
   )
 }
+
+
+
+
+/**
+ * This function creates all the individual product pages in this site
+ */
+
+const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
+  Promise.all(
+    products.map((product) =>
+      // createPage is an action passed to createPages
+      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+      gatsbyUtilities.actions.createPage({
+        // Use the WordPress uri as the Gatsby page path
+        // This is a good idea so that internal links and menus work 👍
+        path: `/shop-kitchen-knives/${product.slug}`,
+
+        // use the blog post template as the page component
+        component: path.resolve(`./src/templates/product.js`),
+
+        // `context` is available in the template as a prop and
+        // as a variable in GraphQL.
+        context: {
+          // we need to add the post id here
+          // so our blog post template knows which blog post
+          // the current page is (when you open it in a browser)
+          id: product.id,
+
+          // We also use the next and previous id's to query them and add links!
+          // previousPostId: previous ? previous.id : null,
+          // nextPostId: next ? next.id : null,
+        },
+      })
+    )
+  )
+
+/**
+ * This function creates creates the Product archive
+ */
+async function createProductArchive({ products, gatsbyUtilities }) {
+
+  const productsPerPage = 20
+
+  const productsChunkedIntoArchivePages = chunk(products, productsPerPage)
+  const totalPages = productsChunkedIntoArchivePages.length
+
+  return Promise.all(
+    productsChunkedIntoArchivePages.map(async (products, index) => {
+      const pageNumber = index + 1
+
+      const getPagePath = page => {
+        if (page > 0 && page <= totalPages) {
+          // Since our homepage is our blog page
+          // we want the first page to be "/" and any additional pages
+          // to be numbered.
+          // "/blog/2" for example
+          return page === 1 ? `/shop-kitchen-knives` : `/shop-kitchen-knives/${page}`
+        }
+
+        return null
+      }
+
+      // createPage is an action passed to createPages
+      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+      await gatsbyUtilities.actions.createPage({
+        path: getPagePath(pageNumber),
+
+        // use the blog post archive template as the page component
+        component: path.resolve(`./src/templates/product-archive.js`),
+
+        // `context` is available in the template as a prop and
+        // as a variable in GraphQL.
+        context: {
+          // the index of our loop is the offset of which posts we want to display
+          // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
+          // etc
+          offset: index * productsPerPage,
+
+          // We need to tell the template how many posts to display too
+          productsPerPage,
+
+          nextPagePath: getPagePath(pageNumber + 1),
+          previousPagePath: getPagePath(pageNumber - 1),
+        },
+      })
+    })
+  )
+}
+
+
 
 /**
  * This function queries Gatsby's GraphQL server and asks for
@@ -163,4 +261,54 @@ async function getPosts({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpPost.edges
+}
+
+
+
+/**
+ * This function queries Gatsby's GraphQL server and asks for
+ * All WordPress products. If there are any GraphQL error it throws an error
+ * Otherwise it will return the posts 🙌
+ *
+ * We're passing in the utilities we got from createPages.
+ * So see https://www.gatsbyjs.com/docs/node-apis/#createPages for more info!
+ */
+
+async function getProducts({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+  query productQuery {
+    allWcProducts {
+      nodes {
+        name
+        id
+        slug
+        stock_quantity
+        short_description
+        price
+        permalink
+        description
+        categories {
+          name
+          slug
+          id
+        }
+        attributes {
+          id
+          name
+          options
+        }
+      }
+    }
+  }
+  `)
+
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return graphqlResult.data.allWcProducts.nodes
 }

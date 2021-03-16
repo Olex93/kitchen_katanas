@@ -28,7 +28,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://wpgatsbydemo.wpengine.com/graphql`,
+          `http://localhost:8888/kitchen_katanas/graphql`,
       },
     },
 
@@ -67,9 +67,27 @@ module.exports = {
         icon: `content/assets/gatsby-icon.png`,
       },
     },
+    {
+      resolve: "@pasdo501/gatsby-source-woocommerce",
+      options: {
+        // Base URL of WordPress site
+        api: 'localhost:8888/kitchen_katanas/',
+        // true if using https. false otherwise.
+        https: false,
+        api_keys: {
+          consumer_key: `ck_30ff37052e58b6ecf7603da6a733286cde8920c9`,
+          consumer_secret: `cs_4d5f98dba6504a491d37250088b785ae066cc65d`,
+        },
+        // Array of strings with fields you'd like to create nodes for...
+        fields: ['products', 'products/categories', 'products/attributes'],
+      }
+    },
+    
 
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-remove-trailing-slashes`,
 
     /**
      * this (optional) plugin enables Progressive Web App + Offline functionality

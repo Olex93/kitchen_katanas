@@ -6,13 +6,13 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const BlogIndex = ({
+const ProductIndex = ({
   data,
   pageContext: { nextPagePath, previousPagePath },
 }) => {
-  const posts = data.allWpPost.nodes
+  const products = data.allWcProducts.nodes
 
-  if (!posts.length) {
+  if (!products.length) {
     return (
       <Layout>
         <SEO title="All posts" />
@@ -32,11 +32,11 @@ const BlogIndex = ({
       <Bio />
 
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.title
+        {products.map(product => {
+          const title = product.name
 
           return (
-            <li key={post.uri}>
+            <li key={product.id}>
               <article
                 className="post-list-item"
                 itemScope
@@ -44,13 +44,13 @@ const BlogIndex = ({
               >
                 <header>
                   <h2>
-                    <Link to={`/kitchen-knife-101${post.uri}`} itemProp="url">
+                    <Link to={`/shop-kitchen-knives/${product.slug}`} itemProp="url">
                       <span itemProp="headline">{parse(title)}</span>
                     </Link>
                   </h2>
-                  <small>{post.date}</small>
+                  <small>{product.date}</small>
                 </header>
-                <section itemProp="description">{parse(post.excerpt)}</section>
+                <section itemProp="description">{parse(product.description)}</section>
               </article>
             </li>
           )
@@ -68,21 +68,30 @@ const BlogIndex = ({
   )
 }
 
-export default BlogIndex
+export default ProductIndex
 
 export const pageQuery = graphql`
-  query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
-    allWpPost(
-      sort: { fields: [date], order: DESC }
-      limit: $postsPerPage
-      skip: $offset
-    ) {
+query productQuery {
+    allWcProducts {
       nodes {
-        excerpt
-        uri
-        date(formatString: "MMMM DD, YYYY")
-        title
-        excerpt
+        name
+        id
+        slug
+        stock_quantity
+        short_description
+        price
+        permalink
+        description
+        categories {
+          name
+          slug
+          id
+        }
+        attributes {
+          id
+          name
+          options
+        }
       }
     }
   }

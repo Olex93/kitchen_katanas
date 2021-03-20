@@ -6,6 +6,10 @@
  *
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -83,8 +87,8 @@ module.exports = {
         // true if using https. false otherwise.
         https: false,
         api_keys: {
-          consumer_key: `ck_30ff37052e58b6ecf7603da6a733286cde8920c9`,
-          consumer_secret: `cs_4d5f98dba6504a491d37250088b785ae066cc65d`,
+          consumer_key: process.env.WOO_CONSUMER_KEY,
+          consumer_secret: process.env.WOO_CONSUMER_SECRET,
         },
         // Array of strings with fields you'd like to create nodes for...
         fields: ["products", "products/categories", "products/attributes"],

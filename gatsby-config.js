@@ -45,6 +45,13 @@ module.exports = {
         path: `${__dirname}/content/assets`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
 
     /**
      * The following two plugins are required if you want to use Gatsby image
@@ -53,6 +60,7 @@ module.exports = {
      */
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
 
     {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
@@ -71,7 +79,7 @@ module.exports = {
       resolve: "@pasdo501/gatsby-source-woocommerce",
       options: {
         // Base URL of WordPress site
-        api: 'localhost:8888/kitchen_katanas/',
+        api: "localhost:8888/kitchen_katanas/",
         // true if using https. false otherwise.
         https: false,
         api_keys: {
@@ -79,15 +87,26 @@ module.exports = {
           consumer_secret: `cs_4d5f98dba6504a491d37250088b785ae066cc65d`,
         },
         // Array of strings with fields you'd like to create nodes for...
-        fields: ['products', 'products/categories', 'products/attributes'],
-      }
+        fields: ["products", "products/categories", "products/attributes"],
+      },
     },
-    
 
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-remove-trailing-slashes`,
+
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `PT Sans/:400,700`,
+          `PTSans-Bold`,
+          `PT Serif\:400`, // you can also specify font weights and styles
+        ],
+        display: "swap",
+      },
+    },
 
     /**
      * this (optional) plugin enables Progressive Web App + Offline functionality

@@ -16,7 +16,6 @@ exports.createPages = async gatsbyUtilities => {
   const posts = await getPosts(gatsbyUtilities)
   // const products = await getProducts(gatsbyUtilities)
 
-
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
     return
@@ -27,11 +26,8 @@ exports.createPages = async gatsbyUtilities => {
   // await createIndividualProductPages({ products, gatsbyUtilities })
 
   // And a paginated archive for each
-  await createBlogPostArchive({ posts, gatsbyUtilities }) 
-  // await createProductArchive({ products, gatsbyUtilities }) 
-
-
-
+  await createBlogPostArchive({ posts, gatsbyUtilities })
+  // await createProductArchive({ products, gatsbyUtilities })
 }
 
 /**
@@ -45,7 +41,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: `/kitchen-knife-101${post.uri}`,
+        path: `${post.uri}`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/blog-post.js`),
@@ -95,7 +91,9 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/kitchen-knife-101` : `/kitchen-knife-101/${page}`
+          return page === 1
+            ? `/kitchen-knife-101`
+            : `/kitchen-knife-101/${page}`
         }
 
         return null
@@ -128,16 +126,13 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
   )
 }
 
-
-
-
 /**
  * This function creates all the individual product pages in this site
  */
 
 const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
   Promise.all(
-    products.map((product) =>
+    products.map(product =>
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
@@ -168,7 +163,6 @@ const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
  * This function creates creates the Product archive
  */
 async function createProductArchive({ products, gatsbyUtilities }) {
-
   const productsPerPage = 20
 
   const productsChunkedIntoArchivePages = chunk(products, productsPerPage)
@@ -184,7 +178,9 @@ async function createProductArchive({ products, gatsbyUtilities }) {
           // we want the first page to be "/" and any additional pages
           // to be numbered.
           // "/blog/2" for example
-          return page === 1 ? `/shop-kitchen-knives` : `/shop-kitchen-knives/${page}`
+          return page === 1
+            ? `/shop-kitchen-knives`
+            : `/shop-kitchen-knives/${page}`
         }
 
         return null
@@ -216,8 +212,6 @@ async function createProductArchive({ products, gatsbyUtilities }) {
     })
   )
 }
-
-
 
 /**
  * This function queries Gatsby's GraphQL server and asks for
@@ -263,8 +257,6 @@ async function getPosts({ graphql, reporter }) {
   return graphqlResult.data.allWpPost.edges
 }
 
-
-
 /**
  * This function queries Gatsby's GraphQL server and asks for
  * All WordPress products. If there are any GraphQL error it throws an error
@@ -276,30 +268,30 @@ async function getPosts({ graphql, reporter }) {
 
 async function getProducts({ graphql, reporter }) {
   const graphqlResult = await graphql(/* GraphQL */ `
-  query productQuery {
-    allWcProducts {
-      nodes {
-        name
-        id
-        slug
-        stock_quantity
-        short_description
-        price
-        permalink
-        description
-        categories {
+    query productQuery {
+      allWcProducts {
+        nodes {
           name
+          id
           slug
-          id
-        }
-        attributes {
-          id
-          name
-          options
+          stock_quantity
+          short_description
+          price
+          permalink
+          description
+          categories {
+            name
+            slug
+            id
+          }
+          attributes {
+            id
+            name
+            options
+          }
         }
       }
     }
-  }
   `)
 
   if (graphqlResult.errors) {

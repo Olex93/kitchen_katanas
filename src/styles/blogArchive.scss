@@ -1,0 +1,22 @@
+@import "./color.scss";
+@import "./typography.scss";
+
+.blog-content-list {
+    .intro {
+        margin: 100px 0 50px 0;
+    }
+    .titleWrapper {
+        text-align: left;
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
+
+    .featuredArticles {
+        margin-bottom: 100px;
+    }
+
+    .featuredArticle {
+        background-color: $platinum;
+        padding: 15px;
+    }
+}

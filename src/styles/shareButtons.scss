@@ -1,0 +1,28 @@
+@import "./color.scss";
+@import "./typography.scss";
+
+.shareButtons {
+    margin: auto;
+    padding-left: 15px;
+    width: 100%;
+    .react-share__ShareButton {
+        margin-right: 10px;
+        & svg {
+            & circle {
+                fill: $white !important;
+            }
+            & path {
+                fill: $blood-red;
+            }
+            &:hover {
+                & circle {
+                    fill: $white !important;
+                    transition: 0.2s all;
+                }
+                & path {
+                    fill: $brand-brown;
+                }
+            }
+        }
+    }
+}

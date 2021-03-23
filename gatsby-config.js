@@ -33,6 +33,7 @@ module.exports = {
         url:
           process.env.WPGRAPHQL_URL ||
           `http://localhost:8888/kitchen_katanas/graphql`,
+        useACF: true,
       },
     },
 

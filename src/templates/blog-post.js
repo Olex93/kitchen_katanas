@@ -10,12 +10,19 @@ import "@wordpress/block-library/build-style/theme.css"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import ShareButtons from "../components/ShareButtons"
 
-const BlogPostTemplate = ({ data: { previous, next, post } }) => {
+const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     alt: post.featuredImage?.node?.alt || ``,
   }
+
+  const title = `Read ${post.title} `
+  const tags = post.categories.nodes.map(category => {
+    return category.name.toString().replace(/ +/g, "")
+  })
+  const url = `https://www.kitchen-katanas.com${post.uri}`
 
   return (
     <Layout>
@@ -28,6 +35,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
       >
         <header>
           <h1 itemProp="headline">{parse(post.title)}</h1>
+          <ShareButtons title={title} url={url} tags={tags} />
 
           <p>{post.date}</p>
 
@@ -98,7 +106,13 @@ export const pageQuery = graphql`
       excerpt
       content
       title
+      uri
       date(formatString: "MMMM DD, YYYY")
+      categories {
+        nodes {
+          name
+        }
+      }
 
       featuredImage {
         node {

@@ -7,6 +7,7 @@ import SEO from "../components/seo"
 import "../styles/blogArchive.scss"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import FeaturedBlogCard from "../components/featuredBlogCard"
+import HorizontalBlogCard from "../components/HorizontalBlogCard"
 
 const BlogIndex = ({
   data,
@@ -32,7 +33,9 @@ const BlogIndex = ({
     <Layout>
       <SEO title="All posts" />
       <div className="row justify-content-center blog-content-list">
-        <div className="col-10">
+        <div className="col-lg-12 col-xl-10">
+          <h1>kitchen knife 101</h1>
+
           <p className="intro">
             Hey 👋 I'm Alex and this is my blog.
             <span>
@@ -43,41 +46,24 @@ const BlogIndex = ({
               knives.
             </span>
           </p>
-          <div className="titleWrapper">
-            <h1>Kitchen Knife 101</h1>
-            <p>Featured articles</p>
-
+          <div>
             {/* FEATURED ARTICLES */}
-            <div className="featuredArticles row ">
-              {featuredPosts.map(post => {
-                return <FeaturedBlogCard post={post} key={post.uri} />
-              })}
+            <div className="featured-wrapper">
+              <h2 className="brown-underline">featured articles</h2>
+
+              <div className="featuredArticles row ">
+                {featuredPosts.map(post => {
+                  return <FeaturedBlogCard post={post} key={post.uri} />
+                })}
+              </div>
             </div>
 
             {/* ALL ARTICLES */}
             <div className="allArticles">
-              <p>All articles</p>
-              <ol style={{ listStyle: `none` }}>
+              <h2 className="brown-underline">all articles</h2>
+              <ol className="blogs-list">
                 {posts.map(post => {
-                  const title = post.title
-
-                  return (
-                    <li key={post.uri}>
-                      <article itemScope itemType="http://schema.org/Article">
-                        <header>
-                          <h2>
-                            <Link to={post.uri} itemProp="url">
-                              <span itemProp="headline">{parse(title)}</span>
-                            </Link>
-                          </h2>
-                          <small>{post.date}</small>
-                        </header>
-                        <section itemProp="description">
-                          {parse(post.excerpt)}
-                        </section>
-                      </article>
-                    </li>
-                  )
+                  return <HorizontalBlogCard post={post} />
                 })}
               </ol>
             </div>
@@ -114,6 +100,32 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         excerpt
+        featuredImage {
+          node {
+            link
+            localFile {
+              childImageSharp {
+                fluid {
+                  src
+                }
+                gatsbyImageData
+              }
+            }
+            altText
+          }
+        }
+        categories {
+          nodes {
+            name
+            uri
+          }
+        }
+        author {
+          node {
+            firstName
+            lastName
+          }
+        }
       }
     }
     featuredPosts: allWpPost(
@@ -125,8 +137,21 @@ export const pageQuery = graphql`
       nodes {
         excerpt
         uri
+        date(formatString: "DD MM YY")
         title
         excerpt
+        author {
+          node {
+            firstName
+            lastName
+          }
+        }
+        categories {
+          nodes {
+            name
+            uri
+          }
+        }
         featuredImage {
           node {
             link

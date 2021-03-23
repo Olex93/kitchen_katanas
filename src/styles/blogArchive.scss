@@ -3,20 +3,278 @@
 
 .blog-content-list {
     .intro {
-        margin: 100px 0 50px 0;
+        margin: 10px 0 70px 0;
     }
-    .titleWrapper {
+    h1 {
         text-align: left;
-        margin-top: 100px;
-        margin-bottom: 50px;
+        margin-top: 70px;
+        margin-bottom: 0;
     }
 
-    .featuredArticles {
+    .featured-wrapper {
+        // background-color: $platinum;
         margin-bottom: 100px;
+        .featuredArticles {
+            .featuredArticle {
+                background-color: $blood-red;
+                padding: 15px;
+            }
+        }
     }
 
-    .featuredArticle {
-        background-color: $platinum;
-        padding: 15px;
+    ol.blogs-list {
+        padding-left: 0;
+        list-style: none;
+    }
+    //ALL POSTS blog card styles//
+    li.blogLi {
+        background: $brand-brown;
+        background: linear-gradient(141deg, $brand-brown 0%, $blood-red) 100%;
+        padding: 4px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+
+        .article-text {
+            max-width: 95%;
+        }
+
+        .blogRow {
+            background-color: $white;
+            -webkit-box-shadow: 0px 0px 8px 1px $raisin-black;
+            -moz-box-shadow: 0px 0px 8px 1px $raisin-black;
+            box-shadow: 0px 0px 8px 1px $raisin-black;
+            .content-col {
+                padding: 15px;
+            }
+        }
+
+        .blogImg {
+            height: 100%;
+            width: 100%;
+            -webkit-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+            box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+        }
+
+        .category-button {
+            background: $white;
+            border: none;
+            padding: 0;
+
+            a {
+                padding: 0;
+                font-family: $serif-font;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+        }
+
+        .cardFlexBox {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin: 20px 0;
+
+            button.readArticle {
+                background: $brand-brown;
+                color: $white;
+                border: none;
+                padding: 5px 10px;
+                margin-right: 20px;
+                border: 2px solid $white;
+                &:hover,
+                &:focus {
+                    background-color: $white;
+                    border: 2px solid $brand-brown;
+                    color: $brand-brown;
+                    transition: all 0.2s;
+                }
+            }
+        }
+
+        .shareButtons {
+            position: absolute;
+            top: 5px;
+            right: 0;
+            width: unset;
+        }
+    }
+}
+
+// TEMPLATE code
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+// Variables
+
+// clear-fix mixin
+@mixin cf {
+    &::before,
+    &::after {
+        content: "";
+        display: table;
+    }
+    &::after {
+        clear: both;
+    }
+}
+
+// Base styles
+.template-card {
+    width: 100%;
+    background: $brand-brown;
+    background: linear-gradient(141deg, $brand-brown 0%, $blood-red) 100%;
+    padding: 4px;
+    margin-bottom: 30px;
+    border-radius: 3px;
+
+    .menu-content {
+        @include cf;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        background-color: $blood-red;
+    }
+    .wrapper {
+        background-color: $white;
+        height: 340px;
+        position: relative;
+        overflow: hidden;
+        -webkit-box-shadow: 0px 0px 8px 1px $raisin-black;
+        -moz-box-shadow: 0px 0px 8px 1px $raisin-black;
+        box-shadow: 0px 0px 8px 1px $raisin-black;
+        &:hover {
+            .data {
+                transform: translateY(10px);
+                z-index: 3;
+            }
+        }
+    }
+    .data {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        transform: translateY(calc(200px + 1em));
+        transition: transform 0.3s;
+        .content {
+            padding: 1em;
+            position: relative;
+            z-index: 1;
+            min-height: 300px;
+        }
+    }
+    .author {
+        font-size: 12px;
+        font-family: $serif-font;
+        color: lighten($raisin-black, 20%);
+    }
+
+    .text {
+        height: 70px;
+        margin: 0;
+    }
+    input[type="checkbox"] {
+        display: none;
+    }
+    input[type="checkbox"]:checked + .menu-content {
+        transform: translateY(-50px);
+    }
+}
+
+// First example styles
+.example-1 {
+    .date {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $blood-red;
+        color: $white;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+        z-index: 2;
+
+        span {
+            display: block;
+            text-align: center;
+        }
+        .day {
+            font-weight: 700;
+        }
+        .month {
+            text-transform: uppercase;
+        }
+        .month,
+        .year {
+            font-size: 12px;
+        }
+    }
+    .content {
+        background-color: $white;
+        box-shadow: 0 5px 30px 10px rgba($raisin-black, 0.3);
+    }
+    .title {
+        a {
+            color: $raisin-black;
+
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: $brand-brown;
+            }
+        }
+    }
+    .menu-button {
+        position: absolute;
+        z-index: 999;
+        top: 16px;
+        right: 16px;
+        width: 25px;
+        text-align: center;
+        cursor: pointer;
+
+        .shareButton {
+            color: lighten($raisin-black, 40%);
+            width: 20px;
+            height: 20px;
+            position: relative;
+            display: inline-block;
+            margin-top: -10px;
+            &:hover,
+            &:focus {
+                color: $brand-brown;
+                transition: all 0.2s;
+            }
+        }
+    }
+    .menu-content {
+        text-align: left;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        transition: transform 0.3s;
+        transform: translateY(0);
+        height: 50px;
+
+        li {
+            width: 100%;
+            float: left;
+            background-color: $jungle-green;
+            height: 50px;
+            position: relative;
+        }
+        a {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            font-family: $sans-font;
+            font-size: 1rem;
+            padding-left: 15px;
+        }
+        span {
+            top: -10px;
+        }
     }
 }

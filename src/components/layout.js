@@ -25,10 +25,9 @@ const Layout = ({ children }) => {
     <div className="container-fluid">
       <nav className="top-navbar">
         <div className="row">
-          <div className="col-1">
-            <img className="logoImage" src="../kitchen-katanas-logo.png" />
-          </div>
-          <div className="col-10 navWrapper">
+          <img className="logoImage" src="../kitchen-katanas-logo.png" />
+
+          <div className="col-7 navWrapper">
             <Link
               to={"/"}
               className="navButton"

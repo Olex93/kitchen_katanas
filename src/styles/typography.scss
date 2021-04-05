@@ -31,15 +31,16 @@ button,
 }
 
 h1 {
-    font-family: $sans-font;
-    font-weight: 700;
+    font-family: $serif-font;
+    font-weight: 400;
     color: $raisin-black;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 h2 {
-    font-family: $sans-font;
-    font-weight: 700;
+    font-family: $serif-font;
+    font-weight: 400;
     color: $raisin-black;
     font-size: 1.5rem;
     position: relative;
@@ -59,7 +60,7 @@ h2 {
 }
 
 p.pHeading {
-    font-family: sans-serif;
+    font-family: $sans-font;
     font-weight: 700;
     margin-bottom: 0;
 }
@@ -67,11 +68,15 @@ p.pHeading {
 h3.title {
     a {
         margin-top: 10px;
-        font-size: 1.4rem;
-        line-height: 2.1rem;
+        font-size: 1.5rem;
+        line-height: 2.3rem;
         margin-bottom: 0;
+        font-family: $serif-font;
+        font-weight: 400;
+        margin-bottom: 20px;
     }
 }
+
 .blogLi {
     p.published {
         font-size: 12px;
@@ -82,10 +87,10 @@ h3.title {
     h3.title {
         margin-bottom: 0;
     }
-    .article-text p {
-        margin-bottom: 10px;
+    .article-excerpt p {
+        margin: 10px 0;
         &.pHeading {
-            margin-bottom: 0;
+            margin-bottom: 5px;
         }
     }
 }
@@ -115,17 +120,19 @@ ul {
     padding-left: 20px;
 }
 
-.article-text {
+.article-excerpt {
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.6rem;
+    line-height: 1.4rem;
     color: $raisin-black;
     opacity: 1;
-    font-family: $serif-font;
+    font-family: $sans-font;
 }
 
 .more-link {
     text-transform: lowercase;
+    color: lighten($raisin-black, 40%);
+    font-weight: 400;
 }
 
 .intro {

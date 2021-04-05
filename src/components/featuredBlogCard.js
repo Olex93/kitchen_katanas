@@ -35,10 +35,12 @@ export default function FeaturedBlogCard(props) {
                 <span class="author">{`${props.post.author.node.firstName} ${props.post.author.node.lastName}`}</span>
                 <h3 class="title">
                   <Link to={props.post.uri} itemProp="url">
-                    <span>{props.post.title.toLowerCase()}</span>
+                    <span>{props.post.title}</span>
                   </Link>
                 </h3>
-                <p className="text article-text">{parse(props.post.excerpt)}</p>
+                <p className="text article-excerpt">
+                  {parse(props.post.excerpt)}
+                </p>
                 <label for={`show-menu${props.post.uri}`} class="menu-button">
                   <BiShareAlt className="shareButton" />
                 </label>

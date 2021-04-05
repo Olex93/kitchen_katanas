@@ -3,12 +3,17 @@
 
 .blog-content-list {
     .intro {
-        margin: 10px 0 70px 0;
+        font-family: $sans-font;
+        max-width: 650px;
+        margin: auto;
+        margin-bottom: 70px;
+        text-align: center;
+        font-size: 1.07rem;
+        line-height: 1.7rem;
     }
     h1 {
-        text-align: left;
-        margin-top: 70px;
-        margin-bottom: 0;
+        margin-top: 50px;
+        text-align: center;
     }
 
     .featured-wrapper {
@@ -34,7 +39,7 @@
         margin-bottom: 15px;
         border-radius: 4px;
 
-        .article-text {
+        .article-excerpt {
             max-width: 95%;
         }
 
@@ -63,7 +68,7 @@
 
             a {
                 padding: 0;
-                font-family: $serif-font;
+                font-family: $sans-font;
                 font-size: 1rem;
                 font-weight: 400;
             }

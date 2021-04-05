@@ -1,0 +1,28 @@
+@import "./color.scss";
+@import "./typography.scss";
+
+.blog-single {
+    article {
+        header {
+            .title-image-wrapper {
+                position: relative;
+                .shareButtons {
+                    margin-left: -15px;
+                }
+                .title-content {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    background-color: $platinum;
+                    padding: 15px 30px 15px 0;
+                }
+            }
+            padding: 50px 0;
+        }
+        .content {
+            background-color: $white;
+            .articleBody {
+            }
+        }
+    }
+}

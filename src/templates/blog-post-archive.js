@@ -33,8 +33,8 @@ const BlogIndex = ({
     <Layout>
       <SEO title="All posts" />
       <div className="row justify-content-center blog-content-list">
-        <div className="col-lg-12 col-xl-10">
-          <h1>kitchen knife 101</h1>
+        <div className="col-lg-10 ">
+          <h1>Kitchen knife 101</h1>
 
           <p className="intro">
             Hey 👋 I'm Alex and this is my blog.
@@ -49,7 +49,7 @@ const BlogIndex = ({
           <div>
             {/* FEATURED ARTICLES */}
             <div className="featured-wrapper">
-              <h2 className="brown-underline">featured articles</h2>
+              <h2 className="brown-underline">Featured articles</h2>
 
               <div className="featuredArticles row ">
                 {featuredPosts.map(post => {
@@ -60,7 +60,7 @@ const BlogIndex = ({
 
             {/* ALL ARTICLES */}
             <div className="allArticles">
-              <h2 className="brown-underline">all articles</h2>
+              <h2 className="brown-underline">All articles</h2>
               <ol className="blogs-list">
                 {posts.map(post => {
                   return <HorizontalBlogCard post={post} />
@@ -99,7 +99,6 @@ export const pageQuery = graphql`
         uri
         date(formatString: "MMMM DD, YYYY")
         title
-        excerpt
         featuredImage {
           node {
             link

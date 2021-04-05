@@ -6,7 +6,7 @@ import ShareButtons from "../components/ShareButtons"
 import { BiShareAlt, BiRightArrowAlt } from "react-icons/bi"
 
 export default function FeaturedBlogCard(props) {
-  const title = props.post.title.toLowerCase()
+  const title = props.post.title
   const categoriesArray = props.post.categories.nodes
 
   const tags = props.post.categories.nodes.map(category => {
@@ -33,7 +33,7 @@ export default function FeaturedBlogCard(props) {
                   </Link>
                 </h3>
               </header>
-              <section className="article-text" itemProp="description">
+              <section className="article-excerpt" itemProp="description">
                 {parse(props.post.excerpt)}
                 <div class="cardFlexBox">
                   <button className="readArticle">
@@ -42,11 +42,11 @@ export default function FeaturedBlogCard(props) {
                   <div>
                     {categoriesArray.length == 1 &&
                       categoriesArray[0].name !== "Uncategorized" && (
-                        <p class="pHeading">category:</p>
+                        <p class="pHeading">Category:</p>
                       )}
                     {categoriesArray.length > 1 &&
                       categoriesArray[0].name !== "Uncategorized" && (
-                        <p class="pHeading">categories:</p>
+                        <p class="pHeading">Categories:</p>
                       )}
                     <ul>
                       {categoriesArray.map(category => {

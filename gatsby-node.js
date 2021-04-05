@@ -12,9 +12,10 @@ const chunk = require(`lodash/chunk`)
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
 exports.createPages = async gatsbyUtilities => {
-  // Query our posts from the GraphQL server
+  // Query our posts, products & categories from the GraphQL server
   const posts = await getPosts(gatsbyUtilities)
   // const products = await getProducts(gatsbyUtilities)
+  const categories = await getCategories(gatsbyUtilities)
 
   // If there are no posts in WordPress, don't do anything
   if (!posts.length) {
@@ -28,6 +29,7 @@ exports.createPages = async gatsbyUtilities => {
   // And a paginated archive for each
   await createBlogPostArchive({ posts, gatsbyUtilities })
   // await createProductArchive({ products, gatsbyUtilities })
+  await createCategoryArchives({ categories, gatsbyUtilities })
 }
 
 /**
@@ -127,6 +129,62 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 }
 
 /**
+ * This function creates creates the blog category archive pages
+ */
+const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
+  Promise.all(
+    categories.map(category => {
+      // createPage is an action passed to createPages
+      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+      gatsbyUtilities.actions.createPage({
+        path: `${category.link}`,
+
+        // use the blog post archive template as the page component
+        component: path.resolve(`./src/templates/category-post-archive.js`),
+
+        // `context` is available in the template as a prop and
+        // as a variable in GraphQL.
+        context: {
+          // the index of our loop is the offset of which posts we want to display
+          // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
+          // etc
+          categoryName: category.name,
+          categoryLink: category.link,
+        },
+      })
+    })
+  )
+
+// const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
+// Promise.all(
+//   categories.map(({category }) =>
+//     // createPage is an action passed to createPages
+//     // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+//     gatsbyUtilities.actions.createPage({
+//       // Use the WordPress uri as the Gatsby page path
+//       // This is a good idea so that internal links and menus work 👍
+//       path: `${post.uri}`,
+
+//       // use the blog post template as the page component
+//       component: path.resolve(`./src/templates/blog-post.js`),
+
+//       // `context` is available in the template as a prop and
+//       // as a variable in GraphQL.
+//       context: {
+//         // we need to add the post id here
+//         // so our blog post template knows which blog post
+//         // the current page is (when you open it in a browser)
+//         id: post.id,
+
+//         // We also use the next and previous id's to query them and add links!
+//         previousPostId: previous ? previous.id : null,
+//         nextPostId: next ? next.id : null,
+//       },
+//     })
+//   )
+// )
+
+/**
  * This function creates all the individual product pages in this site
  */
 
@@ -164,7 +222,6 @@ const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
  */
 async function createProductArchive({ products, gatsbyUtilities }) {
   const productsPerPage = 20
-
   const productsChunkedIntoArchivePages = chunk(products, productsPerPage)
   const totalPages = productsChunkedIntoArchivePages.length
 
@@ -230,14 +287,12 @@ async function getPosts({ graphql, reporter }) {
           previous {
             id
           }
-
           # note: this is a GraphQL alias. It renames "node" to "post" for this query
           # We're doing this because this "node" is a post! It makes our code more readable further down the line.
           post: node {
             id
             uri
           }
-
           next {
             id
           }
@@ -255,6 +310,37 @@ async function getPosts({ graphql, reporter }) {
   }
 
   return graphqlResult.data.allWpPost.edges
+}
+
+/**
+ * This function queries Gatsby's GraphQL server and asks for
+ * All WordPress categories. If there are any GraphQL error it throws an error
+ * Otherwise it will return the posts 🙌
+ *
+ * We're passing in the utilities we got from createPages.
+ * So see https://www.gatsbyjs.com/docs/node-apis/#createPages for more info!
+ */
+
+async function getCategories({ graphql, reporter }) {
+  const graphqlResult = await graphql(/* GraphQL */ `
+    query categoryQuery {
+      allWpCategory {
+        nodes {
+          link
+          name
+        }
+      }
+    }
+  `)
+  if (graphqlResult.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      graphqlResult.errors
+    )
+    return
+  }
+
+  return graphqlResult.data.allWpCategory.nodes
 }
 
 /**

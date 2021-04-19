@@ -32,7 +32,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `http://localhost:8888/kitchen_katanas/graphql`,
+          `https://app-6060d325c1ac181868f8defd.closte.com/graphql`,
         useACF: true,
       },
     },
@@ -84,9 +84,9 @@ module.exports = {
       resolve: "@pasdo501/gatsby-source-woocommerce",
       options: {
         // Base URL of WordPress site
-        api: "localhost:8888/kitchen_katanas/",
+        api: "app-6060d325c1ac181868f8defd.closte.com",
         // true if using https. false otherwise.
-        https: false,
+        https: true,
         api_keys: {
           consumer_key: process.env.WOO_CONSUMER_KEY,
           consumer_secret: process.env.WOO_CONSUMER_SECRET,
@@ -100,6 +100,17 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-remove-trailing-slashes`,
+
+
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: `#b76914`,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
 
     {
       resolve: `gatsby-plugin-google-fonts`,

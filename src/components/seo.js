@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, title }) => {
+const SEO = (props, { description, lang, meta, title }) => {
   const { wp, wpUser } = useStaticQuery(
     graphql`
       query {
@@ -30,50 +30,75 @@ const SEO = ({ description, lang, meta, title }) => {
   )
 
   const metaDescription = description || wp.generalSettings?.description
-  const defaultTitle = wp.generalSettings?.title
-
+  // const defaultTitle = wp.generalSettings?.title
+  
+  
+  
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: wpUser?.twitter || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <Helmet>
+      <htmlAttributes>{lang}</htmlAttributes>
+      <title>{title}</title>
+      <meta name="description" content={metaDescription} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="Summary" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
+      {/* Post structured data */}
+      {props.post &&
+        <script type="application/ld+json">
+          {`
+            [{
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://kitchen-katanas.co.uk"
+                },{
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Kitchen Knife 101",
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101"
+                },{
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "${props.post.categories.nodes[0].name}",
+                  "item": "https://kitchen-katanas.co.uk${props.post.categories.nodes[0].link}"
+              }]
+            }] 
+          `}
+        </script>
+      }
+
+      {/* Category archive page structured data */}
+      {props.categoryArchive == "true"  &&
+        <script type="application/ld+json">
+          {`
+            [{
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://kitchen-katanas.co.uk"
+                },{
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Kitchen Knife 101",
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101"
+                }]
+            }] 
+          `}
+        </script>
+      }
+
+    </Helmet>
   )
 }
 

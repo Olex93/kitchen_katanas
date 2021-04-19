@@ -8,6 +8,7 @@ import "../styles/blogArchive.scss"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import HorizontalBlogCard from "../components/HorizontalBlogCard"
 
+
 const CategoryArchive = (
   { data, pageContext: { categoryName, categoryLink } },
   props
@@ -25,8 +26,8 @@ const CategoryArchive = (
   }
 
   return (
-    <Layout>
-      <SEO title="All posts" />
+    <Layout >
+      <SEO title="All posts" categoryArchive="true" />
       <div className="row justify-content-center blog-content-list">
         <div className="col-lg-10 ">
           <h1>{categoryName}</h1>
@@ -45,6 +46,19 @@ const CategoryArchive = (
             {/* ALL ARTICLES */}
             <div className="allArticles">
               <h2 className="brown-underline">All articles</h2>
+              <nav aria-label="breadcrumb-list">
+                <ol class="breadcrumb-list">
+                  <li class="breadcrumb-link">
+                    <Link to={"/"}>Home</Link>
+                  </li>
+                  <li class="breadcrumb-link">
+                    <Link to={"/kitchen-knife-101"}><a>Kitchen Knife 101</a></Link>
+                  </li>
+                  <li class="breadcrumb-link" aria-current="page">
+                    <p>{categoryName}</p>
+                  </li>
+                </ol>
+              </nav>
               <ol className="blogs-list">
                 {posts.map(post => {
                   return <HorizontalBlogCard post={post} />
@@ -91,11 +105,13 @@ export const categoryQuery = graphql`
           nodes {
             name
             link
+            uri
           }
         }
         author {
           node {
             firstName
+            lastName
           }
         }
       }

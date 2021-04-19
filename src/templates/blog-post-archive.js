@@ -35,6 +35,13 @@ const BlogIndex = ({
       <div className="row justify-content-center blog-content-list">
         <div className="col-lg-10 ">
           <h1>Kitchen knife 101</h1>
+          {/* <nav aria-label="breadcrumb-list">
+            <ol class="breadcrumb-list">
+              <li class="breadcrumb-link">
+                <Link to={"/"}>Home</Link>
+              </li>
+            </ol>
+          </nav> */}
 
           <p className="intro">
             Hey 👋 I'm Alex and this is my blog.

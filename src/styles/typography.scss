@@ -14,9 +14,10 @@ html {
 }
 
 body {
-    font-family: $sans-font;
+    font-family: $serif-font;
     color: $raisin-black;
-    font-size: 1rem;
+    font-size: 1.25rem;
+    line-height: 2rem;
     background-color: $platinum;
 }
 
@@ -31,18 +32,18 @@ button,
 }
 
 h1 {
-    font-family: $serif-font;
-    font-weight: 400;
+    font-family: $sans-font;
+    font-weight: 600;
     color: $raisin-black;
     font-size: 2rem;
     margin-bottom: 20px;
 }
 
 h2 {
-    font-family: $serif-font;
-    font-weight: 400;
+    font-family: $sans-font;
+    font-weight: 600;
     color: $raisin-black;
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     position: relative;
     margin-bottom: 20px;
 }
@@ -53,11 +54,12 @@ h2 {
         a {
             font-size: 1.5rem;
             line-height: 2rem;
-            font-family: $serif-font;
+            font-family: $sans-font;
             font-weight: 400;
         }
     }
 }
+
 
 p.pHeading {
     font-family: $sans-font;
@@ -65,14 +67,18 @@ p.pHeading {
     margin-bottom: 0;
 }
 
+p.tableOfContentsTitle {
+    margin-bottom: 20px;
+}
+
 h3.title {
     a {
         margin-top: 10px;
-        font-size: 1.5rem;
+        font-size: 1.7rem;
         line-height: 2.3rem;
         margin-bottom: 0;
-        font-family: $serif-font;
-        font-weight: 400;
+        font-family: $sans-font;
+        font-weight: 600;
         margin-bottom: 20px;
     }
 }
@@ -80,7 +86,7 @@ h3.title {
 .blogLi {
     p.published {
         font-size: 12px;
-        font-family: "PT Serif", Georgia, Cambria, "Times New Roman";
+        font-family: $serif-font;
         color: rgb(88, 75, 91);
         padding-top: 0;
     }
@@ -126,7 +132,7 @@ ul {
     line-height: 1.4rem;
     color: $raisin-black;
     opacity: 1;
-    font-family: $sans-font;
+    font-family: $serif-font;
 }
 
 .more-link {
@@ -146,5 +152,23 @@ ul {
     span {
         color: $raisin-black;
         opacity: 0.4 !important;
+    }
+}
+
+a.breadcrumb-text, p.breadcrumb-text {
+    font-family: $sans-font;
+    font-weight: 400;
+    font-size: 0.8rem;
+    &.active {
+        font-weight: 600;
+        color:$brand-brown;
+    }
+}
+
+p.author {
+    span {
+        font-family: $sans-font;
+        font-size: 1rem;
+        line-height: 1.5rem;
     }
 }

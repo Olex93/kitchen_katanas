@@ -3,6 +3,8 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import parse from "html-react-parser"
 import { StaticImage } from "gatsby-plugin-image"
 import "../styles/nav.scss"
+import "../styles/global.scss"
+
 
 // const Layout = ({ isHomePage, children }) => {
 //   const {
@@ -25,9 +27,11 @@ const Layout = ({ children }) => {
     <div className="container-fluid">
       <nav className="top-navbar">
         <div className="row">
-          <img className="logoImage" src="../kitchen-katanas-logo.png" />
-
-          <div className="col-7 navWrapper">
+          <Link to="/" itemProp="url">
+            <img className="logoImage" src="/kitchen-katanas-logo.png" />
+          </Link>
+          {/* Topbar nav */}
+          {/* <div className="col-7 navWrapper">
             <Link
               to={"/"}
               className="navButton"
@@ -44,7 +48,7 @@ const Layout = ({ children }) => {
             >
               blog
             </Link>
-          </div>
+          </div> */}
         </div>
       </nav>
 

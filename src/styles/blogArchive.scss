@@ -20,6 +20,42 @@
         // background-color: $platinum;
         margin-bottom: 100px;
         .featuredArticles {
+            .template-card {
+                .data {
+                    transform: unset;
+                    .content {
+                        min-height: unset;
+                        .excerptText {
+                            opacity: 0;
+                            transition: all 0.2s;
+                        }
+                    }
+                }
+                input[type="checkbox"]{
+                    display: none;
+                    + .menu-content {
+                        opacity: 0;
+                        transition: all 0.3s;
+                    }
+                } 
+
+                &:hover,
+                &:focus {
+                    input[type="checkbox"]:checked + .menu-content {
+                        opacity: 1;
+                        transition: all 0.3s;
+                    }
+                    .data {
+                        .content {
+                            .excerptText {
+                                opacity: 1;
+                                transition: all 0.2s;
+                                transition-delay: 0.1s;
+                            }
+                        }
+                    }
+                }
+            }
             .featuredArticle {
                 background-color: $blood-red;
                 padding: 15px;
@@ -51,14 +87,17 @@
             .content-col {
                 padding: 15px;
             }
+            .image-wrapper {
+                max-height: 300px;
+            }
         }
 
         .blogImg {
             height: 100%;
             width: 100%;
-            -webkit-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
-            -moz-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
-            box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+            // -webkit-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+            // -moz-box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
+            // box-shadow: -11px 2px 27px -17px rgba(0, 0, 0, 0.75);
         }
 
         .category-button {
@@ -79,6 +118,8 @@
             align-items: flex-start;
             flex-wrap: wrap;
             margin: 20px 0;
+            align-self: flex-end;
+
 
             button.readArticle {
                 background: $brand-brown;
@@ -177,12 +218,6 @@
         height: 70px;
         margin: 0;
     }
-    input[type="checkbox"] {
-        display: none;
-    }
-    input[type="checkbox"]:checked + .menu-content {
-        transform: translateY(-50px);
-    }
 }
 
 // First example styles
@@ -252,13 +287,9 @@
     }
     .menu-content {
         text-align: left;
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         z-index: -1;
         transition: transform 0.3s;
-        transform: translateY(0);
         height: 50px;
 
         li {

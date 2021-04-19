@@ -13,6 +13,7 @@ import SEO from "../components/seo"
 import ShareButtons from "../components/ShareButtons"
 import "../styles/blogSingle.scss"
 import { forEach } from "lodash"
+import {BiListUl} from 'react-icons/bi';
 
 const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
   const featuredImage = {
@@ -27,30 +28,78 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
 
   const url = `https://www.kitchen-katanas.com${post.uri}`
 
+  const rawContent = post.content;
+  var postContent = document.createElement('html');
+  postContent.innerHTML = rawContent
+  const headingsHTML = postContent.getElementsByTagName('h2');
+  var headings = [].slice.call(headingsHTML);
+
+  React.useEffect(() => {
+    const headings = document.querySelectorAll('h2')
+    for (var i = 0; i < headings.length; i++) {
+      headings[i].setAttribute('id', headings[i].innerHTML.replace(/ +/g, '-').toLowerCase())
+    }
+    console.log(headings)
+  });
+
   return (
     <Layout>
-      <SEO title={post.title} description={post.excerpt} />
+      <SEO title={post.title} description={post.excerpt} post={post} />
       <div className="blog-single">
         <article
           className="blog-post"
           itemScope
           itemType="http://schema.org/Article"
         >
-          <div className="row justify-content-center">
-            <div className="col-12 col-lg-10">
+          <div className="row ">
+            <div className="col-12 col-lg-12 col-xl-10 mr-auto ml-auto">
               <header>
                 <div className="title-image-wrapper">
                   <div className="row">
-                    <div className="col-9">
+                    <div className="col-12 col-md-8">
+
                       <h1 itemProp="headline">{parse(post.title)}</h1>
+                      <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb-list">
+                          <li className="breadcrumb-link">
+                            <Link className="breadcrumb-text" to={"/"}>Home</Link>
+                          </li>
+                          <li className="breadcrumb-link">
+                            <Link className="breadcrumb-text" to={"/kitchen-knife-101"}>Kitchen Knife 101</Link>
+                          </li>
+                          <li className="breadcrumb-link">
+                            {post.categories.nodes.length == 1 ?
+                              <Link className="breadcrumb-text" to={post.categories.nodes[0].link}>{post.categories.nodes[0].name}</Link>
+                              : <div className="dropdown show">
+                                <a className="dropdown-toggle breadcrumb-text" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Categories
+                                  </a>
+
+                                <div class="dropdown-menu breadcrumb-dropdown" aria-labelledby="dropdownMenuLink">
+                                  <ul>
+                                    {post.categories.nodes.map((category, index) => {
+                                      return (
+                                        <>
+                                          <li>
+                                            <Link className="breadcrumb-text" to={category.link}>{category.name}</Link>
+                                          </li>
+                                        </>
+                                      )
+                                    })}
+                                  </ul>
+                                </div>
+                              </div>
+                            }
+                          </li>
+                          <li class="breadcrumb-link " aria-current="page">
+                            <p class="breadcrumb-text active">{post.title}</p>
+                          </li>
+                        </ol>
+                      </nav>
+
                     </div>
-                    <div className="col-3">
-                      <ShareButtons
-                        className="share-buttons"
-                        title={title}
-                        url={url}
-                        tags={tags}
-                      />
+                    <div className="col-12 col-md-4 mt-auto text-md-right">
+                    <p class="author d-none d-md-inline-block"><span>{post.author.node.firstName}</span>{" "} <span>{post.author.node.lastName}</span><span className="date">{post.date}</span></p>
                     </div>
                   </div>
 
@@ -66,47 +115,42 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
                       className="header-image"
                     />
                   )}
-                  <div className="title-content">
-                    <p>
-                      <span>{post.author.node.firstName}</span>{" "}
-                      <span>{post.author.node.lastName}</span>
-                    </p>
-                    <p>{post.date}</p>
-                    <ul className="breadcrumbs">
-                      {/* <li>
-                        <Link to={"/"}>Kitchen Knife 101</Link>
-                      </li> */}
-                      <li>
-                        <Link to={"/kitchen-knife-101"}>Kitchen Knife 101</Link>
-                      </li>
-                    </ul>
-                    <ul className="categoriesList">
-                      {post.categories.nodes.map(category => {
-                        return (
-                          <li>
-                            <Link to={category.link}>{category.name}</Link>
-                          </li>
-                        )
-                      })}
-                    </ul>
+                  <div className="share-content">
+                    <ShareButtons
+                        className="share-buttons"
+                        title={title}
+                        url={url}
+                        tags={tags}
+                      />
                   </div>
                 </div>
               </header>
             </div>
           </div>
-          <div class="row justify-content-center content">
-            <div class="col-12 col-lg-10">
+
+          <div class="row post-content justify-content-start">
+            <div class="col-0 col-xl-1"></div>
+            <div class="col-12 col-md-4 col-lg-3">
+            <hr></hr>
+              <p className="tableOfContentsTitle pHeading"><BiListUl/> Table of contents</p>
+              <ol className="tableOfContents">
+                {headings.map((heading, index) => {
+                  return (
+                    <li><a href={`#${heading.innerHTML.replace(/ +/g, '-').toLowerCase()}`} >{heading.innerHTML}</a></li>
+                  )
+                })}
+              </ol>
+
+            </div>
+            <div class="col-12 col-md-7 col-lg-8 col-xl-6 ml-md-5 mr-lg-auto">
               {!!post.content && (
                 <section itemProp="articleBody">{parse(post.content)}</section>
               )}
-
-              <hr />
-
               <footer>
-                <Bio />
               </footer>
             </div>
           </div>
+
         </article>
 
         <nav className="blog-post-nav">

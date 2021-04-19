@@ -89,10 +89,6 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
-          // Since our homepage is our blog page
-          // we want the first page to be "/" and any additional pages
-          // to be numbered.
-          // "/blog/2" for example
           return page === 1
             ? `/kitchen-knife-101`
             : `/kitchen-knife-101/${page}`

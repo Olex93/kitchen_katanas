@@ -1,0 +1,21 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.breadcrumb-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin:0;
+    
+    .breadcrumb-link {
+        padding:0 15px;
+        position: relative;
+        &::before {
+            content:'/';
+            position: absolute;
+            left: 0;
+            display: block;
+        }
+    }
+}

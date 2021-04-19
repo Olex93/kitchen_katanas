@@ -20,7 +20,7 @@ export default function FeaturedBlogCard(props) {
     <li className="blogLi" key={props.post.id}>
       <div className="container-fluid">
         <div className="row p-0 blogRow">
-          <div className="col-md-9 content-col">
+          <div className="col-md-7 col-lg-7 content-col">
             <article itemScope itemType="http://schema.org/Article">
               <header>
                 <p className="published">
@@ -36,9 +36,11 @@ export default function FeaturedBlogCard(props) {
               <section className="article-excerpt" itemProp="description">
                 {parse(props.post.excerpt)}
                 <div class="cardFlexBox">
-                  <button className="readArticle">
-                    Read full article <BiRightArrowAlt />
-                  </button>
+                  <Link to={props.post.uri} itemProp="url">
+                    <button className="readArticle">
+                      Read full article <BiRightArrowAlt />
+                    </button>
+                  </Link>
                   <div>
                     {categoriesArray.length == 1 &&
                       categoriesArray[0].name !== "Uncategorized" && (
@@ -74,7 +76,7 @@ export default function FeaturedBlogCard(props) {
               />
             </article>
           </div>
-          <div className="col-md-3 p-0">
+          <div className="col-md-5 col-lg-5 image-wrapper p-0">
             {props.post.featuredImage && (
               <GatsbyImage
                 className="blogImg"

@@ -5,9 +5,12 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/blogArchive.scss"
+
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import FeaturedBlogCard from "../components/featuredBlogCard"
 import HorizontalBlogCard from "../components/HorizontalBlogCard"
+import Slider from "react-slick";
+
 
 const BlogIndex = ({
   data,
@@ -15,6 +18,14 @@ const BlogIndex = ({
 }) => {
   const posts = data.allPosts.nodes
   const featuredPosts = data.featuredPosts.nodes
+
+  // const settings = {
+  //   dots: true,
+  //   infinite: false,
+  //   speed: 500,
+  //   slidesToShow: 2,
+  //   slidesToScroll: 1
+  // };
 
   if (!posts.length) {
     return (
@@ -33,44 +44,38 @@ const BlogIndex = ({
     <Layout>
       <SEO title="All posts" />
       <div className="row justify-content-center blog-content-list">
-        <div className="col-lg-10 ">
+        <div className="col-12 col-xl-10 ">
           <h1>Kitchen knife 101</h1>
-          {/* <nav aria-label="breadcrumb-list">
-            <ol class="breadcrumb-list">
-              <li class="breadcrumb-link">
-                <Link to={"/"}>Home</Link>
-              </li>
-            </ol>
-          </nav> */}
-
           <p className="intro">
-            Hey 👋 I'm Alex and this is my blog.
+            Here's everything I wish I knew back when I started buying decent knives!
             <span>
               {" "}
-              I started Kitchen Katanas to bring quality kitchen knives to the
-              everyday home cook. Here, I share my own experience as an avid
-              cook, as I continue to journey into the world of quality kitchen
-              knives.
+              Learn what makes a great knife, how to look after your knives, which knives suite what and more...
             </span>
           </p>
           <div>
             {/* FEATURED ARTICLES */}
-            <div className="featured-wrapper">
+            {/* <div className="featured-wrapper">
               <h2 className="brown-underline">Featured articles</h2>
-
-              <div className="featuredArticles row ">
-                {featuredPosts.map(post => {
-                  return <FeaturedBlogCard post={post} key={post.uri} />
-                })}
+              <div className="featuredArticles  ">
+                <Slider {...settings}>
+                  {featuredPosts.map((post, index) => {
+                    return (
+                      <div>
+                      <FeaturedBlogCard post={post} key={post.uri} index={index} />
+                      </div>
+                    )
+                  })}
+                </Slider>
               </div>
-            </div>
+            </div> */}
 
             {/* ALL ARTICLES */}
             <div className="allArticles">
               <h2 className="brown-underline">All articles</h2>
               <ol className="blogs-list">
-                {posts.map(post => {
-                  return <HorizontalBlogCard post={post} />
+                {posts.map((post, index) => {
+                  return <HorizontalBlogCard post={post} key={index} index={index} />
                 })}
               </ol>
             </div>

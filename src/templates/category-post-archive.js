@@ -29,7 +29,7 @@ const CategoryArchive = (
     <Layout >
       <SEO title="All posts" categoryArchive="true" />
       <div className="row justify-content-center blog-content-list">
-        <div className="col-lg-10 ">
+        <div className="col-xl-10 col-12">
           <h1>{categoryName}</h1>
 
           <p className="intro">
@@ -46,22 +46,22 @@ const CategoryArchive = (
             {/* ALL ARTICLES */}
             <div className="allArticles">
               <h2 className="brown-underline">All articles</h2>
-              <nav aria-label="breadcrumb-list">
-                <ol class="breadcrumb-list">
-                  <li class="breadcrumb-link">
-                    <Link to={"/"}>Home</Link>
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb-list">
+                  <li className="breadcrumb-link">
+                    <Link className="breadcrumb-text" to={"/"}>Home</Link>
                   </li>
-                  <li class="breadcrumb-link">
-                    <Link to={"/kitchen-knife-101"}><a>Kitchen Knife 101</a></Link>
+                  <li className="breadcrumb-link">
+                    <Link className="breadcrumb-text" to={"/kitchen-knife-101"}>Kitchen Knife 101</Link>
                   </li>
-                  <li class="breadcrumb-link" aria-current="page">
-                    <p>{categoryName}</p>
+                  <li className="breadcrumb-link" aria-current="page">
+                    <p className="breadcrumb-text active">{categoryName}</p>
                   </li>
                 </ol>
               </nav>
               <ol className="blogs-list">
-                {posts.map(post => {
-                  return <HorizontalBlogCard post={post} />
+                {posts.map((post, index) => {
+                  return <HorizontalBlogCard post={post} key={index} index={index}/>
                 })}
               </ol>
             </div>

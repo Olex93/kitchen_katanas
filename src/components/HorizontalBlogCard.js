@@ -14,13 +14,28 @@ export default function FeaturedBlogCard(props) {
       return category.name.toString().replace(/ +/g, "")
     }
   })
+  console.log(props.index)
 
   // console.log(props.post.categories.nodes)
   return (
     <li className="blogLi" key={props.post.id}>
       <div className="container-fluid">
-        <div className="row p-0 blogRow">
-          <div className="col-md-7 col-lg-7 content-col">
+
+        <div className={`row p-0 blogRow ${props.index % 2 == 0 ? "justify-content-start" : "justify-content-end"}`}>
+        {props.index % 2 == 0  && 
+          <div className="col-md-5 pb-md-5 pl-md-0 image-wrapper p-0">
+            {props.post.featuredImage && (
+              <GatsbyImage
+                className="blogImg"
+                image={getImage(props.post.featuredImage.node.localFile)}
+                alt={props.post.featuredImage.altText}
+                layout="fluid"
+                width={200}
+                height={200}
+              />
+            )}
+          </div>}
+          <div className="col-md-7 content-col p-md-0 mt-md-2">
             <article itemScope itemType="http://schema.org/Article">
               <header>
                 <p className="published">
@@ -34,32 +49,25 @@ export default function FeaturedBlogCard(props) {
                 </h3>
               </header>
               <section className="article-excerpt" itemProp="description">
-                {parse(props.post.excerpt)}
+                {parse(props.post.excerpt)}<span>... Continue reading <Link to={props.post.uri} className="continue-reading">{`${props.post.title}`}</Link></span>
                 <div class="cardFlexBox">
                   <Link to={props.post.uri} itemProp="url">
                     <button className="readArticle">
                       Read full article <BiRightArrowAlt />
                     </button>
                   </Link>
-                  <div>
-                    {categoriesArray.length == 1 &&
-                      categoriesArray[0].name !== "Uncategorized" && (
-                        <p class="pHeading">Category:</p>
+                  <div className="dropdown">
+                      {categoriesArray[0].name !== "Uncategorized" && (
+                        <button className="category-button dropdown-toggle" type="button" id="category-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories:</button>
                       )}
-                    {categoriesArray.length > 1 &&
-                      categoriesArray[0].name !== "Uncategorized" && (
-                        <p class="pHeading">Categories:</p>
-                      )}
-                    <ul>
+                    <ul className="dropdown-menu category-dropdown"  aria-labelledby="category-dropdown-button">
                       {categoriesArray.map(category => {
                         if (category.name !== "Uncategorized") {
                           return (
                             <li>
-                              <button className="category-button">
                                 <Link to={category.uri} itemProp="url">
                                   {category.name} <BiRightArrowAlt />
                                 </Link>
-                              </button>
                             </li>
                           )
                         }
@@ -76,7 +84,8 @@ export default function FeaturedBlogCard(props) {
               />
             </article>
           </div>
-          <div className="col-md-5 col-lg-5 image-wrapper p-0">
+          {props.index % 2 !== 0 && 
+          <div className="col-md-5 pb-md-5 pr-md-0 image-wrapper p-0">
             {props.post.featuredImage && (
               <GatsbyImage
                 className="blogImg"
@@ -87,8 +96,10 @@ export default function FeaturedBlogCard(props) {
                 height={200}
               />
             )}
-          </div>
+          </div>}
+
         </div>
+
       </div>
     </li>
   )

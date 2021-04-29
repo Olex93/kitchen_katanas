@@ -42,8 +42,8 @@ export default (
           <div className="allArticles">
             <h2 className="brown-underline">All articles</h2>
             <ol className="blogs-list">
-              {posts.map(post => {
-                return <HorizontalBlogCard post={post} />
+              {posts.map((post, index) => {
+                return <HorizontalBlogCard post={post} key={index} index={index} />
               })}
             </ol>
           </div>

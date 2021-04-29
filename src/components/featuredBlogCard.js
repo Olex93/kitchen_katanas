@@ -22,7 +22,7 @@ export default function FeaturedBlogCard(props) {
 
 
   return (
-    <div className="col-12 col-lg-4 col-sm-6 ">
+    <div>
       <article itemScope itemType="http://schema.org/Article">
         <div
           class="example-1 template-card"

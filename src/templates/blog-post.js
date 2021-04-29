@@ -13,7 +13,7 @@ import SEO from "../components/seo"
 import ShareButtons from "../components/ShareButtons"
 import "../styles/blogSingle.scss"
 import { forEach } from "lodash"
-import {BiListUl} from 'react-icons/bi';
+import { BiListUl } from 'react-icons/bi';
 
 const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
   const featuredImage = {
@@ -28,18 +28,28 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
 
   const url = `https://www.kitchen-katanas.com${post.uri}`
 
-  const rawContent = post.content;
-  var postContent = document.createElement('html');
-  postContent.innerHTML = rawContent
-  const headingsHTML = postContent.getElementsByTagName('h2');
-  var headings = [].slice.call(headingsHTML);
+
+
+
+  const [visibleHeadings, setVisibleHeadings] = React.useState(null)
+  
 
   React.useEffect(() => {
-    const headings = document.querySelectorAll('h2')
-    for (var i = 0; i < headings.length; i++) {
-      headings[i].setAttribute('id', headings[i].innerHTML.replace(/ +/g, '-').toLowerCase())
+    //These next 5 lines parse the html content retrieved from wordpress API and
+    // pull out headings to use in the table of contents
+    const rawContent = post.content;
+    var postContent = document.createElement('html')
+    postContent.innerHTML = rawContent
+    var headingsHTML = postContent.getElementsByTagName('h2')
+    var headings = [].slice.call(headingsHTML)
+    
+
+    const bodyHeadings = document.querySelectorAll('h2')
+    for (var i = 0; i < bodyHeadings.length; i++) {
+      bodyHeadings[i].setAttribute('id', bodyHeadings[i].innerHTML.replace(/ +/g, '-').toLowerCase())
     }
-    console.log(headings)
+
+    setVisibleHeadings(headings)
   });
 
   return (
@@ -99,7 +109,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
 
                     </div>
                     <div className="col-12 col-md-4 mt-auto text-md-right">
-                    <p class="author d-none d-md-inline-block"><span>{post.author.node.firstName}</span>{" "} <span>{post.author.node.lastName}</span><span className="date">{post.date}</span></p>
+                      <p class="author d-none d-md-inline-block"><span>{post.author.node.firstName}</span>{" "} <span>{post.author.node.lastName}</span><span className="date">{post.date}</span></p>
                     </div>
                   </div>
 
@@ -117,11 +127,11 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
                   )}
                   <div className="share-content">
                     <ShareButtons
-                        className="share-buttons"
-                        title={title}
-                        url={url}
-                        tags={tags}
-                      />
+                      className="share-buttons"
+                      title={title}
+                      url={url}
+                      tags={tags}
+                    />
                   </div>
                 </div>
               </header>
@@ -131,15 +141,18 @@ const BlogPostTemplate = ({ data: { previous, next, post } }, props) => {
           <div class="row post-content justify-content-start">
             <div class="col-0 col-xl-1"></div>
             <div class="col-12 col-md-4 col-lg-3">
-            <hr></hr>
-              <p className="tableOfContentsTitle pHeading"><BiListUl/> Table of contents</p>
-              <ol className="tableOfContents">
-                {headings.map((heading, index) => {
-                  return (
-                    <li><a href={`#${heading.innerHTML.replace(/ +/g, '-').toLowerCase()}`} >{heading.innerHTML}</a></li>
-                  )
-                })}
-              </ol>
+              <hr></hr>
+              <p className="tableOfContentsTitle pHeading"><BiListUl /> Table of contents</p>
+               {visibleHeadings !== null && <ol className="tableOfContents">
+                {
+                  visibleHeadings.map((heading, index) => {
+                    return (
+                      <li><a href={`#${heading.innerHTML.replace(/ +/g, '-').toLowerCase()}`} >{heading.innerHTML}</a></li>
+                    )
+                  })
+                }
+
+              </ol>}
 
             </div>
             <div class="col-12 col-md-7 col-lg-8 col-xl-6 ml-md-5 mr-lg-auto">

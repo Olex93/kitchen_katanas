@@ -82,9 +82,9 @@
                 display: inline;
             }
             .continue-reading {
-                color: $blood-red  ;
+                color: $jungle-green;
                 &:hover, &:focus {
-                    color: $jungle-green
+                    color: $brand-brown
                 }
             }
         }
@@ -118,11 +118,15 @@
  
         .category-dropdown {
             padding: 10px;
+            padding-left: 30px;
             border: none;
             box-shadow: none;
             min-width: 240px;
             border-radius: 0;
-            list-style: none;
+            &.dropdown-menu {
+                list-style: unset;
+                list-style-type: circle;
+            }
             li {
                 padding-bottom: 5px;
                 a {

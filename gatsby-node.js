@@ -35,9 +35,19 @@ exports.createPages = async gatsbyUtilities => {
 /**
  * This function creates all the individual blog pages in this site
  */
-const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
-  Promise.all(
-    posts.map(({ previous, post, next }) =>
+
+const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
+
+Promise.all(
+
+    posts.map(({ previous, post, next }) => {
+      
+      var relatedCategories = []
+      post.categories.nodes.map(category => {  
+        relatedCategories.push(category.name)
+      })
+
+
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
@@ -59,10 +69,11 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
           // We also use the next and previous id's to query them and add links!
           previousPostId: previous ? previous.id : null,
           nextPostId: next ? next.id : null,
+          relatedCategories: relatedCategories
         },
-      })
+      })}
     )
-  )
+  )}
 
 /**
  * This function creates creates the blog post archive
@@ -288,6 +299,11 @@ async function getPosts({ graphql, reporter }) {
           post: node {
             id
             uri
+            categories {
+              nodes {
+               name
+              }
+            }
           }
           next {
             id

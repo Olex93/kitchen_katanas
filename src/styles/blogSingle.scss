@@ -2,8 +2,26 @@
 @import "./typography.scss";
 
 .blog-single {
+
+    .recommendedArticles {
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        height: 100%;
+        article {
+            background-color: $white;
+            padding: 20px;
+        }
+    }
+
     article {
+
         header {
+            &.recommendedHeader {
+                padding:0;
+            }
+
             .title-image-wrapper {
                 position: relative;
 

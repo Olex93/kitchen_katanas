@@ -13,6 +13,7 @@ import ShareButtons from "../components/ShareButtons"
 import "../styles/blogSingle.scss"
 import { BiListUl } from "react-icons/bi"
 import ReccomendedArticles from "../components/ReccomendedArticles"
+import { AnimateSharedLayout, motion } from "framer-motion"
 
 
 const BlogPostTemplate = (
@@ -206,22 +207,26 @@ const BlogPostTemplate = (
             </div>
           </div>
         </article>
+        <AnimateSharedLayout >
+          <motion.div layout className="more-blog-content row  justify-content-center">
+            <div class="col-12 col-md-5">
+              <hr></hr>
+              <p className="pHeading">More recent articles</p>
+            </div>
+            <div class="col-12 col-md-5">
+              <hr></hr>
 
-        <div className="more-blog-content row  justify-content-start">
-          <div class="col-0 col-xl-1"></div>
-          <div class="col-12 col-md-4 col-lg-3">
-            <hr></hr>
-            <p className="pHeading">Other recent articles</p>
-          </div>
-          <div class="col-12 col-md-7 col-lg-8 col-xl-6 ml-md-5 mr-lg-auto">
-            <p className="pHeading">Reccomended for you</p>
+              <p className="pHeading">Other articles from this category</p>
               {relatedCategories.nodes.map((relatedPost, index) => {
                 if (relatedPost.title !== post.title) {
-                  return <ReccomendedArticles post={relatedPost} key={index} />
+                  return (
+                    <ReccomendedArticles layout post={relatedPost} key={index} />
+                  )
                 }
               })}
-          </div>
-        </div>
+            </div>
+          </motion.div>
+        </AnimateSharedLayout>
 
         <nav className="blog-post-nav">
           <ul

@@ -22,7 +22,7 @@ export default function FeaturedBlogCard(props) {
 
 
   return (
-    <div>
+    <motion.div>
       <article itemScope itemType="http://schema.org/Article">
         <div
           class="example-1 template-card"
@@ -74,7 +74,7 @@ export default function FeaturedBlogCard(props) {
           </div>
         </div>
       </article>
-    </div>
+    </motion.div>
 
   )
 }

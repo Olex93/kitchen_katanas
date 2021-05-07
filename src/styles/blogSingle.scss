@@ -2,26 +2,8 @@
 @import "./typography.scss";
 
 .blog-single {
-
-    .recommendedArticles {
-        display: flex;
-        justify-content: center;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        height: 100%;
-        article {
-            background-color: $white;
-            padding: 20px;
-        }
-    }
-
     article {
-
         header {
-            &.recommendedHeader {
-                padding:0;
-            }
-
             .title-image-wrapper {
                 position: relative;
 
@@ -36,14 +18,14 @@
                         display: block;
                     }
                 }
-                
+
                 .breadcrumb-list {
                     flex-wrap: wrap;
-                } 
+                }
 
                 .breadcrumb-dropdown {
                     background-color: $platinum;
-                    padding:15px;
+                    padding: 15px;
                     margin-left: -15px;
                     border: none;
                     box-shadow: none;
@@ -56,14 +38,14 @@
                         transition: all 0.2s;
                         ul {
                             li {
-                                opacity:1;
+                                opacity: 1;
                                 transition: all 0.2s;
                             }
                         }
                     }
                     ul {
-                        border:none;
-                        padding-left:0;
+                        border: none;
+                        padding-left: 0;
                         li {
                             list-style: none;
                             margin-left: 0;
@@ -71,7 +53,7 @@
                         }
                     }
                 }
-                 
+
                 .share-content {
                     position: absolute;
                     bottom: 0;
@@ -96,6 +78,79 @@
 
             .articleBody {
             }
+        }
+    }
+
+    .reccomendedArticles {
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+
+        .reccomendedHeader {
+            padding: 0;
+
+            .title {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 0;
+                justify-content: space-between;
+
+                a {
+                    margin: 0;
+                    &.title-link {
+                        margin-right: 15px;
+                    }
+                }
+            }
+
+            svg {
+                &:hover,
+                &:focus {
+                    color: $brand-brown;
+                }
+                &.up {
+                    transform: rotate(180deg);
+                    transition: all 0.2s;
+                }
+
+                &.down {
+                    transform: rotate(0deg);
+                    transition: all 0.2s;
+                }
+            }
+        }
+
+        .article-excerpt {
+            margin-top: 10px;
+            p {
+                display: inline;
+            }
+        }
+
+        .image-wrapper {
+            text-align: center;
+            width: 90%;
+            top: 0;
+            left: 0;
+            margin: auto;
+            margin-left: 5%;
+            z-index: -1;
+
+            .gatsby-image-wrapper {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .content-wrapper {
+            padding: 20px;
+        }
+
+        .readArticle {
+            margin-top: 20px;
         }
     }
 }

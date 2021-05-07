@@ -138,11 +138,12 @@
             left: 0;
             margin: auto;
             margin-left: 5%;
-            z-index: -1;
 
             .gatsby-image-wrapper {
                 height: 100%;
                 width: 100%;
+                z-index: -1;
+
             }
         }
         .content-wrapper {

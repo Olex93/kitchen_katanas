@@ -208,6 +208,7 @@ const BlogPostTemplate = (
           </div>
         </article>
         <AnimateSharedLayout >
+          {!relatedCategories.nodes.categories == "uncategorised" && 
           <motion.div layout className="more-blog-content row  justify-content-center">
             {/* <div class="col-12 col-md-5">
               <hr></hr>
@@ -231,7 +232,7 @@ const BlogPostTemplate = (
             {/* <div class="col-12 col-md-5 justify-content-end">
               <ShareButtons />
             </div> */}
-          </motion.div>
+          </motion.div>}
         </AnimateSharedLayout>
 
         <nav className="blog-post-nav">

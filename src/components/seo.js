@@ -31,7 +31,8 @@ const SEO = (props, { description, lang, meta, title }) => {
 
   const metaDescription = props.description || wp.generalSettings?.description
   // const defaultTitle = wp.generalSettings?.title
-  
+  const title = props.title
+  const lang = "en"
   
   
   return (

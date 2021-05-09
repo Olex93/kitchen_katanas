@@ -39,7 +39,9 @@ const SEO = (props, { description, meta }) => {
   
   return (
     <Helmet>
+
       <htmlAttributes>{lang}</htmlAttributes>
+
       <title>{title}</title>
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />

@@ -1,7 +1,5 @@
-import React, { useState } from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import parse from "html-react-parser"
-import { StaticImage } from "gatsby-plugin-image"
+import React from "react"
+import { Link} from "gatsby"
 import "../styles/nav.scss"
 import "../styles/global.scss"
 

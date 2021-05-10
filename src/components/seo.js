@@ -10,7 +10,9 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = (props, { description, lang, meta, title }) => {
+// const SEO = (props, { description, meta, lang, title }) => {
+
+const SEO = (props, { description, meta }) => {
   const { wp, wpUser } = useStaticQuery(
     graphql`
       query {
@@ -29,14 +31,16 @@ const SEO = (props, { description, lang, meta, title }) => {
     `
   )
 
-  const metaDescription = description || wp.generalSettings?.description
+  const metaDescription = props.description || wp.generalSettings?.description
   // const defaultTitle = wp.generalSettings?.title
-  
+  const title = props.title
   
   
   return (
-    <Helmet>
-      <htmlAttributes>{lang}</htmlAttributes>
+    <Helmet htmlAttributes={{lang: "en"}}>
+
+      {/* <htmlAttributes ></htmlAttributes> */}
+    
       <title>{title}</title>
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />

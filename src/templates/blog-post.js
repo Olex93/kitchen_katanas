@@ -209,24 +209,31 @@ const BlogPostTemplate = (
           </div>
         </article>
         <AnimateSharedLayout >
+          {!relatedCategories.nodes.categories == "uncategorised" && 
           <motion.div layout className="more-blog-content row  justify-content-center">
-            <div class="col-12 col-md-5">
+            {/* <div class="col-12 col-md-5">
               <hr></hr>
-              <p className="pHeading">More recent articles</p>
-            </div>
-            <div class="col-12 col-md-5">
+              <p className="pHeading">Recent articles</p>
+            </div> */}
+            <div class="col-10">
               <hr></hr>
-
-              <p className="pHeading">Other articles from this category</p>
+              <p className="pHeading">More articles in this category</p>
+              <div className="row">
               {relatedCategories.nodes.map((relatedPost, index) => {
                 if (relatedPost.title !== post.title) {
                   return (
+                    <div className="col-6">
                     <ReccomendedArticles layout post={relatedPost} key={index} />
+                    </div>
                   )
                 }
               })}
+              </div>
             </div>
-          </motion.div>
+            {/* <div class="col-12 col-md-5 justify-content-end">
+              <ShareButtons />
+            </div> */}
+          </motion.div>}
         </AnimateSharedLayout>
 
         <nav className="blog-post-nav">

@@ -9,18 +9,21 @@ export default function ReccomendedArticles(props) {
   const title = props.post.title
   const [openClose, setOpenClose] = React.useState("closed")
   const [bgImageHeight, setbgImageHeight] = React.useState(0)
+  const [bgImageOpacity, setbgImageOpacity] = React.useState(0)
   const [textDisplay, setTextDisplay] = React.useState("none")
   const [upDownArrow, setupDownArrow] = React.useState("down")
 
   function boxTrigger(){
     if(openClose === "closed") {
       setbgImageHeight("150px")
+      setbgImageOpacity(1)
       setTextDisplay("block")
       setupDownArrow("up")
       setOpenClose("open")
     }
     else if (openClose === "open"){
       setbgImageHeight(0)
+      setbgImageOpacity(0)
       setTextDisplay("none")
       setupDownArrow("down")
       setOpenClose("closed")
@@ -37,7 +40,7 @@ export default function ReccomendedArticles(props) {
             <article itemScope itemType="http://schema.org/Article">
             {props.post.featuredImage && (
 
-                <motion.div animate={{height:bgImageHeight}} className="image-wrapper">
+                <motion.div animate={{height:bgImageHeight, opacity:bgImageOpacity}} className="image-wrapper">
                     <GatsbyImage
                       className="blogImg"
                       image={getImage(props.post.featuredImage.node.localFile)}

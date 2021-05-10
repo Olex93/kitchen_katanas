@@ -23,7 +23,7 @@ const BlogPostTemplate = (
 
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
-    alt: post.featuredImage?.node?.alt || ``,
+    altText: post.featuredImage?.node?.altText || ``,
   }
   const title = `Read ${post.title} `
   const tags = post.categories.nodes.map(category => {
@@ -154,7 +154,7 @@ const BlogPostTemplate = (
                   {featuredImage?.fluid && (
                     <Image
                       fluid={featuredImage.fluid}
-                      alt={featuredImage.alt}
+                      alt={featuredImage.altText}
                       style={{
                         maxHeight: "250px",
                         width: "100%",

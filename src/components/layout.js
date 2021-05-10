@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
       <nav className="top-navbar">
         <div className="row">
           <Link to="/" itemProp="url">
-            <img className="logoImage" src="/kitchen-katanas-logo.png" />
+            <img className="logoImage" alt="Kitchen Katanas Logo" src="/kitchen-katanas-logo.png" />
           </Link>
           {/* Topbar nav */}
           {/* <div className="col-7 navWrapper">

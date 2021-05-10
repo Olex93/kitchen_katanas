@@ -34,14 +34,13 @@ const SEO = (props, { description, meta }) => {
   const metaDescription = props.description || wp.generalSettings?.description
   // const defaultTitle = wp.generalSettings?.title
   const title = props.title
-  const lang = "en"
   
   
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{lang: "en"}}>
 
-      <htmlAttributes>{lang}</htmlAttributes>
-
+      {/* <htmlAttributes ></htmlAttributes> */}
+    
       <title>{title}</title>
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />

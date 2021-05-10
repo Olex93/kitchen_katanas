@@ -15,12 +15,10 @@ import { BiListUl } from "react-icons/bi"
 import ReccomendedArticles from "../components/ReccomendedArticles"
 import { AnimateSharedLayout, motion } from "framer-motion"
 
-
 const BlogPostTemplate = (
   { data: { previous, next, post, relatedCategories } },
   props
 ) => {
-
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     altText: post.featuredImage?.node?.altText || ``,
@@ -43,8 +41,8 @@ const BlogPostTemplate = (
     var headingsHTML = postContent.getElementsByTagName("h2")
     var headings = [].slice.call(headingsHTML)
 
-    // This loop waits until the document is ready and the headings have been mapped out as 
-    // anchor links, then sets the id on each of the anchors to create jump links 
+    // This loop waits until the document is ready and the headings have been mapped out as
+    // anchor links, then sets the id on each of the anchors to create jump links
     const bodyHeadings = document.querySelectorAll("h2")
     for (var i = 0; i < bodyHeadings.length; i++) {
       bodyHeadings[i].setAttribute(
@@ -110,7 +108,7 @@ const BlogPostTemplate = (
                                 </a>
 
                                 <div
-                                  class="dropdown-menu breadcrumb-dropdown"
+                                  className="dropdown-menu breadcrumb-dropdown"
                                   aria-labelledby="dropdownMenuLink"
                                 >
                                   <ul>
@@ -135,14 +133,16 @@ const BlogPostTemplate = (
                               </div>
                             )}
                           </li>
-                          <li class="breadcrumb-link " aria-current="page">
-                            <p class="breadcrumb-text active">{post.title}</p>
+                          <li className="breadcrumb-link " aria-current="page">
+                            <p className="breadcrumb-text active">
+                              {post.title}
+                            </p>
                           </li>
                         </ol>
                       </nav>
                     </div>
                     <div className="col-12 col-md-4 mt-auto text-md-right">
-                      <p class="author d-none d-md-inline-block">
+                      <p className="author d-none d-md-inline-block">
                         <span>{post.author.node.firstName}</span>{" "}
                         <span>{post.author.node.lastName}</span>
                         <span className="date">{post.date}</span>
@@ -175,32 +175,34 @@ const BlogPostTemplate = (
             </div>
           </div>
 
-          <div class="row post-content justify-content-start">
-            <div class="col-0 col-xl-1"></div>
-            <div class="col-12 col-md-4 col-lg-3">
-              <hr></hr>
-              <p className="tableOfContentsTitle pHeading">
-                <BiListUl /> Table of contents
-              </p>
-              {visibleHeadings !== null && (
-                <ol className="tableOfContents">
-                  {visibleHeadings.map((heading, index) => {
-                    return (
-                      <li>
-                        <a
-                          href={`#${heading.innerHTML
-                            .replace(/ +/g, "-")
-                            .toLowerCase()}`}
-                        >
-                          {heading.innerHTML}
-                        </a>
-                      </li>
-                    )
-                  })}
-                </ol>
-              )}
+          <div className="row post-content justify-content-start">
+            <div className="col-0 col-xl-1"></div>
+            <div className="col-12 col-md-4 col-lg-3">
+              <div className="table-of-contents">
+                <hr></hr>
+                <p className="tableOfContentsTitle pHeading">
+                  <BiListUl /> Table of contents
+                </p>
+                {visibleHeadings !== null && (
+                  <ol className="tableOfContentsList">
+                    {visibleHeadings.map((heading, index) => {
+                      return (
+                        <li>
+                          <a
+                            href={`#${heading.innerHTML
+                              .replace(/ +/g, "-")
+                              .toLowerCase()}`}
+                          >
+                            {heading.innerHTML}
+                          </a>
+                        </li>
+                      )
+                    })}
+                  </ol>
+                )}
+              </div>
             </div>
-            <div class="col-12 col-md-7 col-lg-8 col-xl-6 ml-md-5 mr-lg-auto">
+            <div className="col-12 col-md-7 col-lg-8 col-xl-6 ml-md-5 mr-lg-auto ">
               {!!post.content && (
                 <section itemProp="articleBody">{parse(post.content)}</section>
               )}
@@ -208,32 +210,40 @@ const BlogPostTemplate = (
             </div>
           </div>
         </article>
-        <AnimateSharedLayout >
-          {!relatedCategories.nodes.categories == "uncategorised" && 
-          <motion.div layout className="more-blog-content row  justify-content-center">
-            {/* <div class="col-12 col-md-5">
+        <AnimateSharedLayout>
+          {!relatedCategories.nodes.categories == "uncategorised" && (
+            <motion.div
+              layout
+              className="more-blog-content row  justify-content-center"
+            >
+              {/* <div className="col-12 col-md-5">
               <hr></hr>
               <p className="pHeading">Recent articles</p>
             </div> */}
-            <div class="col-10">
-              <hr></hr>
-              <p className="pHeading">More articles in this category</p>
-              <div className="row">
-              {relatedCategories.nodes.map((relatedPost, index) => {
-                if (relatedPost.title !== post.title) {
-                  return (
-                    <div className="col-6">
-                    <ReccomendedArticles layout post={relatedPost} key={index} />
-                    </div>
-                  )
-                }
-              })}
+              <div className="col-10">
+                <hr></hr>
+                <p className="pHeading">More articles in this category</p>
+                <div className="row">
+                  {relatedCategories.nodes.map((relatedPost, index) => {
+                    if (relatedPost.title !== post.title) {
+                      return (
+                        <div className="col-6">
+                          <ReccomendedArticles
+                            layout
+                            post={relatedPost}
+                            key={index}
+                          />
+                        </div>
+                      )
+                    }
+                  })}
+                </div>
               </div>
-            </div>
-            {/* <div class="col-12 col-md-5 justify-content-end">
+              {/* <div className="col-12 col-md-5 justify-content-end">
               <ShareButtons />
             </div> */}
-          </motion.div>}
+            </motion.div>
+          )}
         </AnimateSharedLayout>
 
         <nav className="blog-post-nav">

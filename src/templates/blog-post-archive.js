@@ -30,7 +30,7 @@ const BlogIndex = ({
   if (!posts.length) {
     return (
       <Layout>
-        <SEO title="All posts" />
+        <SEO title="Kitchen Katanas: articles, guides and reviews." />
         <Bio />
         <p>
           No blog posts found. Add posts to your WordPress site and they'll

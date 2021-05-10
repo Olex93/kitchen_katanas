@@ -104,12 +104,13 @@ h3.title {
 button,
 a {
     font-family: $sans-font;
-    font-weight: 700;
-    color: $raisin-black;
+    font-weight: 600;
+    color: $jungle-green;
     text-decoration: none;
-    font-size: 1rem;
+    // font-size: 1rem;
     cursor: pointer !important;
 }
+
 
 a {
     &:hover,
@@ -118,6 +119,12 @@ a {
         color: $brand-brown;
         transition: all 0.2s;
     }
+}
+
+.readArticle, .category-button {
+    font-family: $sans-font;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 ol,
@@ -161,7 +168,7 @@ a.breadcrumb-text, p.breadcrumb-text {
     font-size: 0.8rem;
     &.active {
         font-weight: 600;
-        color:$brand-brown;
+        color:$jungle-green;
     }
 }
 

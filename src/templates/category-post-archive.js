@@ -10,7 +10,7 @@ import HorizontalBlogCard from "../components/HorizontalBlogCard"
 
 
 const CategoryArchive = (
-  { data, pageContext: { categoryName, categoryLink } },
+  { data, pageContext: { categoryName, categoryLink, categoryDescription } },
   props
 ) => {
   const posts = data.allPosts.nodes
@@ -27,7 +27,7 @@ const CategoryArchive = (
 
   return (
     <Layout >
-      <SEO title="All posts" categoryArchive="true" />
+      <SEO title={`${categoryName} Archive`} categoryArchive="true" description={categoryDescription} />
       <div className="row justify-content-center blog-content-list">
         <div className="col-xl-10 col-12">
           <h1>{categoryName}</h1>
@@ -106,6 +106,7 @@ export const categoryQuery = graphql`
             name
             link
             uri
+            description
           }
         }
         author {

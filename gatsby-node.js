@@ -141,6 +141,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
   Promise.all(
     categories.map(category => {
+      console.log(category)
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
@@ -157,6 +158,7 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
           // etc
           categoryName: category.name,
           categoryLink: category.link,
+          categoryDescription:category.description
         },
       })
     })
@@ -340,6 +342,7 @@ async function getCategories({ graphql, reporter }) {
         nodes {
           link
           name
+          description
         }
       }
     }

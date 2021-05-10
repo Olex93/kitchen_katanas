@@ -34,7 +34,7 @@ const SEO = (props, { description, meta }) => {
   const metaDescription = props.description || wp.generalSettings?.description
   // const defaultTitle = wp.generalSettings?.title
   const title = props.title
-  
+  const featuredImage = props.featuredImage
   
   return (
     <Helmet htmlAttributes={{lang: "en"}}>
@@ -47,6 +47,7 @@ const SEO = (props, { description, meta }) => {
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="Summary" />
+      <meta name="og:image" content={featuredImage} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
       <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 

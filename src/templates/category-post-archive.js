@@ -1,11 +1,11 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import parse from "html-react-parser"
+// import parse from "html-react-parser"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/blogArchive.scss"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+// import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import HorizontalBlogCard from "../components/HorizontalBlogCard"
 
 

@@ -56,7 +56,7 @@ const BlogPostTemplate = (
 
   return (
     <Layout>
-      <SEO title={post.title} description={post.excerpt} post={post} />
+      <SEO title={post.title} description={post.excerpt} post={post} featuredImage={post.featuredImage.node.uri}/>
       <div className="blog-single">
         <article
           className="blog-post"
@@ -311,6 +311,7 @@ export const pageQuery = graphql`
       featuredImage {
         node {
           altText
+          uri
           localFile {
             childImageSharp {
               fluid(maxWidth: 1000, quality: 100) {

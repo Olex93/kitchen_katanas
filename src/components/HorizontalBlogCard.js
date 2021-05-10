@@ -1,9 +1,9 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link} from "gatsby"
 import parse from "html-react-parser"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import ShareButtons from "../components/ShareButtons"
-import { BiShareAlt, BiRightArrowAlt } from "react-icons/bi"
+import { BiRightArrowAlt } from "react-icons/bi"
 
 export default function FeaturedBlogCard(props) {
   const title = props.post.title

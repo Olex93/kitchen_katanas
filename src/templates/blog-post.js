@@ -20,30 +20,31 @@ const BlogPostTemplate = (
   { data: { previous, next, post, relatedCategories } },
   props
 ) => {
+
   const featuredImage = {
     fluid: post.featuredImage?.node?.localFile?.childImageSharp?.fluid,
     alt: post.featuredImage?.node?.alt || ``,
   }
-
   const title = `Read ${post.title} `
   const tags = post.categories.nodes.map(category => {
     return category.name.toString().replace(/ +/g, "")
   })
   const url = `https://www.kitchen-katanas.com${post.uri}`
 
-  // console.log(relatedCategories.nodes)
-
   const [visibleHeadings, setVisibleHeadings] = React.useState(null)
 
+  //useEffect hook to create the table of contentes jump links
   React.useEffect(() => {
     //These next 5 lines parse the html content retrieved from wordpress API and
-    // pull out headings to use in the table of contents
+    // pull out headings to use in the table of contents map
     const rawContent = post.content
     var postContent = document.createElement("html")
     postContent.innerHTML = rawContent
     var headingsHTML = postContent.getElementsByTagName("h2")
     var headings = [].slice.call(headingsHTML)
 
+    // This loop waits until the document is ready and the headings have been mapped out as 
+    // anchor links, then sets the id on each of the anchors to create jump links 
     const bodyHeadings = document.querySelectorAll("h2")
     for (var i = 0; i < bodyHeadings.length; i++) {
       bodyHeadings[i].setAttribute(
@@ -51,7 +52,7 @@ const BlogPostTemplate = (
         bodyHeadings[i].innerHTML.replace(/ +/g, "-").toLowerCase()
       )
     }
-
+    //This sets the headings to visible once they have been created and setup
     setVisibleHeadings(headings)
   }, [])
 
@@ -270,7 +271,7 @@ export const pageQuery = graphql`
     $nextPostId: String
     $relatedCategories: [String]
   ) {
-    # selecting the current post by id
+    # selecting the current post by id, this is everything we need for this post (and to pass back to SEO component)
     post: wpPost(id: { eq: $id }) {
       id
       excerpt
@@ -290,7 +291,6 @@ export const pageQuery = graphql`
           link
         }
       }
-
       featuredImage {
         node {
           altText
@@ -304,7 +304,7 @@ export const pageQuery = graphql`
         }
       }
     }
-
+    #This query pulls all other wp posts that match the current category(s) and pulls relevant data for the footer related articles
     relatedCategories: allWpPost(
       filter: {
         categories: {

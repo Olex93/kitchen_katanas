@@ -33,14 +33,7 @@ const CategoryArchive = (
           <h1>{categoryName}</h1>
 
           <p className="intro">
-            Hey 👋 I'm Alex and this is my blog.
-            <span>
-              {" "}
-              I started Kitchen Katanas to bring quality kitchen knives to the
-              everyday home cook. Here, I share my own experience as an avid
-              cook, as I continue to journey into the world of quality kitchen
-              knives.
-            </span>
+            {categoryDescription}
           </p>
           <div>
             {/* ALL ARTICLES */}

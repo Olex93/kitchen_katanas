@@ -80,7 +80,7 @@ const BlogPostTemplate = (
                           <li className="breadcrumb-link">
                             <Link
                               className="breadcrumb-text"
-                              to={"/kitchen-knife-101"}
+                              to={"/kitchen-knife-101/"}
                             >
                               Kitchen Knife 101
                             </Link>
@@ -89,7 +89,7 @@ const BlogPostTemplate = (
                             {post.categories.nodes.length == 1 ? (
                               <Link
                                 className="breadcrumb-text"
-                                to={post.categories.nodes[0].link}
+                                to={`${post.categories.nodes[0].link}/`}
                               >
                                 {post.categories.nodes[0].name}
                               </Link>
@@ -119,7 +119,7 @@ const BlogPostTemplate = (
                                             <li>
                                               <Link
                                                 className="breadcrumb-text"
-                                                to={category.link}
+                                                to={`${category.link}/`}
                                               >
                                                 {category.name}
                                               </Link>
@@ -258,7 +258,7 @@ const BlogPostTemplate = (
           >
             <li>
               {previous && (
-                <Link to={previous.uri} rel="prev">
+                <Link to={`${previous.uri}/`} rel="prev">
                   ← {parse(previous.title)}
                 </Link>
               )}
@@ -266,7 +266,7 @@ const BlogPostTemplate = (
 
             <li>
               {next && (
-                <Link to={next.uri} rel="next">
+                <Link to={`${next.uri}/`} rel="next">
                   {parse(next.title)} →
                 </Link>
               )}

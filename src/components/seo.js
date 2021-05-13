@@ -72,12 +72,12 @@ const SEO = (props, { description, meta }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Kitchen Knife 101",
-                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101"
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101/"
                 },{
                   "@type": "ListItem",
                   "position": 3,
-                  "name": "${props.post.categories.nodes[0].name}",
-                  "item": "https://kitchen-katanas.co.uk${props.post.categories.nodes[0].link}"
+                  "name": "${props.post.categories.nodes[0].name}/",
+                  "item": "https://kitchen-katanas.co.uk${props.post.categories.nodes[0].link}/"
               }]
             }] 
           `}
@@ -101,7 +101,7 @@ const SEO = (props, { description, meta }) => {
                   "@type": "ListItem",
                   "position": 2,
                   "name": "Kitchen Knife 101",
-                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101"
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knife-101/"
                 }]
             }] 
           `}

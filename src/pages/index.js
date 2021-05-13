@@ -17,8 +17,8 @@ export default (
   const posts = data.allPosts.nodes
 
   return <Layout >
-    <SEO title="Kitchen Katanas" description="Top quality kitchen knives for the everyday home cook."/>
-        {/* <Link to={'/kitchen-knife-101'} itemProp="url">
+    <SEO title="Kitchen Katanas" description="Top quality kitchen knives for the everyday home cook. Learn how you can source sharp, handmade knives for a reasonable price."/>
+        {/* <Link to={'/kitchen-knife-101/'} itemProp="url">
                       <span itemProp="headline">Visit the blog</span>
         </Link> */}
 

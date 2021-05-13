@@ -14,6 +14,9 @@ export default function FeaturedBlogCard(props) {
       return category.name.toString().replace(/ +/g, "")
     }
   })
+
+
+  const postLink = `${props.post.uri}/`
   console.log(props.index)
 
   // console.log(props.post.categories.nodes)
@@ -43,15 +46,15 @@ export default function FeaturedBlogCard(props) {
                   , <span>{props.post.date}</span>
                 </p>
                 <h3 className="title">
-                  <Link to={props.post.uri} itemProp="url">
+                  <Link to={postLink} itemProp="url">
                     <span itemProp="headline">{parse(title)}</span>
                   </Link>
                 </h3>
               </header>
               <section className="article-excerpt" itemProp="description">
-                {parse(props.post.excerpt)}<span>... Continue reading <Link to={props.post.uri} className="continue-reading">{`${props.post.title}`}</Link></span>
+                {parse(props.post.excerpt)}<span>... Continue reading <Link to={postLink} className="continue-reading">{`${props.post.title}`}</Link></span>
                 <div class="cardFlexBox">
-                  <Link to={props.post.uri} itemProp="url">
+                  <Link to={postLink} itemProp="url">
                     <button className="readArticle">
                       Read full article <BiRightArrowAlt />
                     </button>
@@ -65,7 +68,7 @@ export default function FeaturedBlogCard(props) {
                         if (category.name !== "Uncategorized") {
                           return (
                             <li>
-                                <Link to={category.uri} itemProp="url">
+                                <Link to={`${category.uri}/`} itemProp="url">
                                   {category.name} <BiRightArrowAlt />
                                 </Link>
                             </li>
@@ -78,7 +81,7 @@ export default function FeaturedBlogCard(props) {
               </section>
               <ShareButtons
                 title={props.post.title}
-                url={`https://www.kitchen-katanas.com${props.post.uri}`}
+                url={`https://www.kitchen-katanas.com${postLink}`}
                 tags={tags}
                 className="social-share"
               />

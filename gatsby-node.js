@@ -53,7 +53,7 @@ Promise.all(
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: `${post.uri}`,
+        path: `${post.uri}/`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/blog-post.js`),
@@ -101,8 +101,8 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
           return page === 1
-            ? `/kitchen-knife-101`
-            : `/kitchen-knife-101/${page}`
+            ? `/kitchen-knife-101/`
+            : `/kitchen-knife-101/${page}/`
         }
 
         return null
@@ -145,7 +145,7 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
-        path: `${category.link}`,
+        path: `${category.link}/`,
 
         // use the blog post archive template as the page component
         component: path.resolve(`./src/templates/category-post-archive.js`),
@@ -157,7 +157,7 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
           // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
           // etc
           categoryName: category.name,
-          categoryLink: category.link,
+          categoryLink: `${category.link}/`,
           categoryDescription:category.description
         },
       })
@@ -205,7 +205,7 @@ const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: `/shop-kitchen-knives/${product.slug}`,
+        path: `/shop-kitchen-knives/${product.slug}/`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/product.js`),
@@ -245,8 +245,8 @@ async function createProductArchive({ products, gatsbyUtilities }) {
           // to be numbered.
           // "/blog/2" for example
           return page === 1
-            ? `/shop-kitchen-knives`
-            : `/shop-kitchen-knives/${page}`
+            ? `/shop-kitchen-knives/`
+            : `/shop-kitchen-knives/${page}/`
         }
 
         return null

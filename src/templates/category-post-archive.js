@@ -45,7 +45,7 @@ const CategoryArchive = (
                     <Link className="breadcrumb-text" to={"/"}>Home</Link>
                   </li>
                   <li className="breadcrumb-link">
-                    <Link className="breadcrumb-text" to={"/kitchen-knife-101"}>Kitchen Knife 101</Link>
+                    <Link className="breadcrumb-text" to={"/kitchen-knife-101/"}>Kitchen Knife 101</Link>
                   </li>
                   <li className="breadcrumb-link" aria-current="page">
                     <p className="breadcrumb-text active">{categoryName}</p>

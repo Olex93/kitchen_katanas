@@ -10,7 +10,7 @@ export default () => {
     return <Layout isHomePage>
         <SEO title="404: Not Found" />
         <p>Best kitchen knives uk</p>
-        <Link to={'/kitchen-knife-101'} itemProp="url">
+        <Link to={'/kitchen-knife-101/'} itemProp="url">
                       <span itemProp="headline">Visit the blog</span>
         </Link>
     </Layout>

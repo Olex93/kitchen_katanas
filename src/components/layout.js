@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
               home
             </Link>
             <Link
-              to={"/kitchen-knife-101"}
+              to={"/kitchen-knife-101/"}
               className="navButton"
               activeClassName="active"
               itemProp="url"

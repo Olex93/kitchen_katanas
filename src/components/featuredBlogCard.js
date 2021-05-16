@@ -18,6 +18,9 @@ export default function FeaturedBlogCard(props) {
     return category.name.toString().replace(/ +/g, "")
   })
 
+  const postLink = `${props.post.uri}/`
+
+
   const [showExcerpt, setShowExcerpt] = React.useState(false)
 
 
@@ -43,18 +46,18 @@ export default function FeaturedBlogCard(props) {
             <div class="data">
               <AnimateSharedLayout>
                 <motion.div layout>
-                <input type="checkbox" id={`show-menu${props.post.uri}`} />
+                <input type="checkbox" id={`show-menu${postLink}`} />
                   <div class="menu-content">
                     <ShareButtons
                       title={props.post.title}
-                      url={`https://www.kitchen-katanas.com${props.post.uri}`}
+                      url={`https://www.kitchen-katanas.com${postLink}`}
                       tags={tags}
                     />
                   </div>
                   <div class="content">
                     <motion.span layout class="author">{`${props.post.author.node.firstName} ${props.post.author.node.lastName}`}</motion.span>
                     <h3 class="title">
-                      <Link to={props.post.uri} itemProp="url">
+                      <Link to={postLink} itemProp="url">
                         <span >{props.post.title}</span>
                       </Link>
                     </h3>
@@ -62,7 +65,7 @@ export default function FeaturedBlogCard(props) {
                       {showExcerpt && parse(props.post.excerpt)}
                     </div>
 
-                    <label for={`show-menu${props.post.uri}`} class="menu-button">
+                    <label for={`show-menu${postLink}`} class="menu-button">
                       <BiShareAlt className="shareButton" />
                     </label>
                   </div>

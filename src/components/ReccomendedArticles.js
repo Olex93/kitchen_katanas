@@ -28,8 +28,9 @@ export default function ReccomendedArticles(props) {
       setupDownArrow("down")
       setOpenClose("closed")
     }
-
   }
+
+  const postLink = `${props.post.uri}/`
 
   return (
     <AnimateSharedLayout>
@@ -55,11 +56,11 @@ export default function ReccomendedArticles(props) {
               <div className="content-wrapper white-bg">
                 <header className="reccomendedHeader">
                   <h3 className="title">
-                    <Link className="title-link" to={props.post.uri} itemProp="url">
+                    <Link className="title-link" to={postLink} itemProp="url">
                       {parse(title)}
                     </Link>
                     <span>
-                    <Link to={props.post.uri} itemProp="url">
+                    <Link to={postLink} itemProp="url">
                       <BiRightArrowCircle/>
                     </Link>
                     <motion.span><BiDownArrowAlt className={upDownArrow} onClick={() => boxTrigger()}/></motion.span>
@@ -67,9 +68,9 @@ export default function ReccomendedArticles(props) {
                   </h3>
                 </header>
                 <motion.section animate={{display:textDisplay}} className="article-excerpt" itemProp="description">
-                  {parse(props.post.excerpt)}<span className="continue-reading">... Continue reading <Link to={props.post.uri} className="continue-reading">{`${props.post.title}`}</Link></span>
+                  {parse(props.post.excerpt)}<span className="continue-reading">... Continue reading <Link to={postLink} className="continue-reading">{`${props.post.title}`}</Link></span>
                   <div class="cardFlexBox">
-                    <Link to={props.post.uri} itemProp="url">
+                    <Link to={postLink} itemProp="url">
                       <button className="readArticle">
                         Read full article <BiRightArrowAlt />
                       </button>

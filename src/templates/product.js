@@ -15,7 +15,7 @@ const ProductTemplate = ({ data: { product } }) => {
 
   return (
     <Layout>
-      <SEO title={product.name} description={product.description} />
+      {/* <SEO title={product.name} description={product.description} /> */}
 
       <article
         className="blog-post"

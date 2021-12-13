@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/blogArchive.scss"
 
+
 // import { GatsbyImage, getImage } from "gatsby-plugin-image"
 // import FeaturedBlogCard from "../components/featuredBlogCard"
 import HorizontalBlogCard from "../components/HorizontalBlogCard"

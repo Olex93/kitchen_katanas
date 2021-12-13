@@ -32,8 +32,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://app-6060d325c1ac181868f8defd.closte.com/graphql`,
-        useACF: true,
+          `https://app-6060d325c1ac181868f8defd.closte.com/graphql`
       },
     },
 
@@ -92,8 +91,8 @@ module.exports = {
       options: {
         // Base URL of WordPress site
         api: "app-6060d325c1ac181868f8defd.closte.com",
-        // true if using https. false otherwise.
-        https: true,
+        verbose: true,
+        https:true,
         api_keys: {
           consumer_key: process.env.WOO_CONSUMER_KEY,
           consumer_secret: process.env.WOO_CONSUMER_SECRET,

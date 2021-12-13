@@ -18,7 +18,7 @@ exports.createPages = async gatsbyUtilities => {
   const categories = await getCategories(gatsbyUtilities)
 
   // If there are no posts in WordPress, don't do anything
-  if (!posts.length) {
+  if (!posts.length && !products.length) {
     return
   }
 
@@ -141,7 +141,6 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
   Promise.all(
     categories.map(category => {
-      console.log(category)
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
@@ -163,35 +162,6 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
       })
     })
   )
-
-// const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
-// Promise.all(
-//   categories.map(({category }) =>
-//     // createPage is an action passed to createPages
-//     // See https://www.gatsbyjs.com/docs/actions#createPage for more info
-//     gatsbyUtilities.actions.createPage({
-//       // Use the WordPress uri as the Gatsby page path
-//       // This is a good idea so that internal links and menus work 👍
-//       path: `${post.uri}`,
-
-//       // use the blog post template as the page component
-//       component: path.resolve(`./src/templates/blog-post.js`),
-
-//       // `context` is available in the template as a prop and
-//       // as a variable in GraphQL.
-//       context: {
-//         // we need to add the post id here
-//         // so our blog post template knows which blog post
-//         // the current page is (when you open it in a browser)
-//         id: post.id,
-
-//         // We also use the next and previous id's to query them and add links!
-//         previousPostId: previous ? previous.id : null,
-//         nextPostId: next ? next.id : null,
-//       },
-//     })
-//   )
-// )
 
 /**
  * This function creates all the individual product pages in this site

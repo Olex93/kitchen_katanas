@@ -8,7 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@pasdo501/gatsby-source-woocommerce": "^0.14.3",
+    "@pasdo501/gatsby-source-woocommerce": "0.14.3",
     "@popperjs/core": "^2.9.1",
     "@wordpress/block-library": "^2.27.0",
     "bootstrap": "^4.6.0",

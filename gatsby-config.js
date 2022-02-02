@@ -32,7 +32,8 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://app-6060d325c1ac181868f8defd.closte.com/graphql`
+          `https://app-6060d325c1ac181868f8defd.closte.com/graphql`,
+          useACF: true,
       },
     },
 

@@ -16,7 +16,7 @@ const ProductTemplate = ({ data: { product } }) => {
   return (
     <Layout>
       {/* <SEO title={product.name} description={product.description} /> */}
-
+      {console.log(product)}
       <article
         className="blog-post"
         itemScope
@@ -29,7 +29,7 @@ const ProductTemplate = ({ data: { product } }) => {
 
           {/* if we have a featured image for this post let's display it */}
           {product.images?.fluid && (
-            <Img fluid={product.wcProducts.images[0].localFile.childImageSharp.fluid} alt={product.wcProducts.images[0].alt} />
+            <Img fluid={product.images[0].localFile.childImageSharp.fluid} alt={product.images[0].alt} />
           )}
         </header>
 

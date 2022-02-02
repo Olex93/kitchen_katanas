@@ -17,8 +17,9 @@ export default function FeaturedBlogCard(props) {
 
 
   const postLink = `${props.post.uri}/`
-  console.log(props.index)
-
+  const image = getImage(props.post.featuredImage.node.localFile)
+  console.log('image', image)
+  console.log(props.post)
   // console.log(props.post.categories.nodes)
   return (
     <li className="blogLi" key={props.post.id}>
@@ -30,7 +31,7 @@ export default function FeaturedBlogCard(props) {
             {props.post.featuredImage && (
               <GatsbyImage
                 className="blogImg"
-                image={getImage(props.post.featuredImage.node.localFile)}
+                image={image}
                 alt={props.post.featuredImage.altText}
                 layout="fluid"
                 width={200}

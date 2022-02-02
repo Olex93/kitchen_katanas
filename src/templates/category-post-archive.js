@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 // import parse from "html-react-parser"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/blogArchive.scss"
@@ -19,7 +18,6 @@ const CategoryArchive = (
     return (
       <Layout>
         <SEO title="No posts" />
-        <Bio />
         <p>No blog posts found for this category</p>
       </Layout>
     )

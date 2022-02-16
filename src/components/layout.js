@@ -1,8 +1,7 @@
 import React from "react"
-import { Link} from "gatsby"
+import { Link } from "gatsby"
 import "../styles/nav.scss"
 import "../styles/global.scss"
-
 
 // const Layout = ({ isHomePage, children }) => {
 //   const {
@@ -22,14 +21,21 @@ import "../styles/global.scss"
 
 const Layout = ({ children }) => {
   return (
-    <div className="container-fluid">
-      <nav className="top-navbar">
+    <div className="container-fluid ">
+      <nav className="top-navbar mb-5">
         <div className="row">
-          <Link to="/" itemProp="url">
-            <img className="logoImage" alt="Kitchen Katanas Logo" src="/kitchen-katanas-logo.png" />
-          </Link>
+          <div className="col-1">
+            <Link to="/" itemProp="url">
+              <img
+                className="logoImage"
+                alt="Kitchen Katanas Logo"
+                src="/kitchen-katanas-logo.png"
+              />
+            </Link>
+          </div>
+
           {/* Topbar nav */}
-          {/* <div className="col-7 navWrapper">
+          <div className="col-7 offset-2 navWrapper">
             <Link
               to={"/"}
               className="navButton"
@@ -46,7 +52,7 @@ const Layout = ({ children }) => {
             >
               blog
             </Link>
-          </div> */}
+          </div>
         </div>
       </nav>
 

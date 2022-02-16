@@ -178,7 +178,7 @@ const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         // This is a good idea so that internal links and menus work 👍
-        path: `/shop-kitchen-knives/${product.slug}/`,
+        path: `/kitchen-knives/${product.slug}/`,
 
         // use the blog post template as the page component
         component: path.resolve(`./src/templates/product.js`),
@@ -220,10 +220,10 @@ async function createProductArchive({ products, gatsbyUtilities }) {
 
       const getPagePath = (pageSlug) => {
         if (pageSlug == '') {
-          return '/shop-kitchen-knives/'    
+          return '/kitchen-knives/'    
         } 
         else {
-          return '/shop-kitchen-knives/' + pageSlug + '/'
+          return '/kitchen-knives/' + pageSlug + '/'
         }
       }
 
@@ -259,8 +259,8 @@ async function createProductArchive({ products, gatsbyUtilities }) {
           // to be numbered.
           // "/blog/2" for example
         //   return pageNumber === 1
-        //     ? `/shop-kitchen-knives/`
-        //     : `/shop-kitchen-knives/${pageNumber}/`
+        //     ? `/kitchen-knives/`
+        //     : `/kitchen-knives/${pageNumber}/`
         // }
 
       //   return null

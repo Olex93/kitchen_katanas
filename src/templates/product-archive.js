@@ -1,15 +1,53 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-import parse from "html-react-parser"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-
+import React, { useState, useEffect } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import "../styles/productArchive.scss"
+import ProductCard from "../components/ProductCard"
+import {
+  filterProductsGlobalState,
+  selectedFiltersGlobalState,
+} from "../store"
+import { useRecoilState } from "recoil"
+import ProductFilterLeftBar from "../components/ProductFilterLeftBar"
 
 const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
-  {
-    console.log(products)
+  const [filteredProducts, setFilteredProducts] = useRecoilState(filterProductsGlobalState)
+  const [selectedFilters] = useRecoilState(selectedFiltersGlobalState)
+
+  //---------------- FILTER THE PRODUCTS USING THE SELECTED FILTERS GLOBAL ARRAY --------------
+  const filterProducts = () => {
+    if (selectedFilters.length == 0) {
+      setFilteredProducts(products)
+    } else {
+      //Empty out filtered products
+      setFilteredProducts([])
+
+      products.forEach(product => {
+        const productCategories = []
+        //get a list of all of the product's categories
+        product.categories.forEach(category => {
+          productCategories.push(category.name)
+        })
+
+        //check if the product categories contains the selected filter categories
+        if (
+          selectedFilters.every(filterItem =>
+            productCategories.includes(filterItem)
+          )
+        ) {
+          //add the product to filteredProducts list
+          setFilteredProducts(filterProducts => [...filterProducts, product])
+        } else {
+          console.log("not found")
+        }
+      })
+    }
   }
+
+  useEffect(() => {
+    // console.log("Use effect selected filters", selectedFilters)
+    filterProducts()
+  }, [selectedFilters])
 
   if (!products.length) {
     return (
@@ -24,61 +62,23 @@ const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
   }
 
   return (
-    <Layout isHomePage>
+    <Layout>
       <SEO title="All posts" />
-
-      <ol style={{ listStyle: `none` }}>
-        {products.map(product => {
-          const title = product.name
-
-          return (
-            <li key={product.id}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link
-                      to={`/shop-kitchen-knives/${product.slug}`}
-                      itemProp="url"
-                    >
-                      <span itemProp="headline">{parse(title)}</span>
-                    </Link>
-                  </h2>
-                  <small>{product.date}</small>
-                </header>
-                <section itemProp="description">
-                  {product.description && parse(product.description)}
-
-                  {/* Featured Image */}
-                  {product.images[0] !== null &&
-                  <GatsbyImage
-                    image={
-                      product.images[0].localFile.childrenImageSharp[0]
-                        .gatsbyImageData
-                    }
-                    alt={"1"}
-                  />}
-
-                  {/* All images */}
-                  {/* {product.images.map(image => {
-                    return (
-                      <GatsbyImage
-                        image={
-                          image.localFile.childrenImageSharp[0].gatsbyImageData
-                        }
-                        alt={"1"}
-                      />
-                    )
-                  })} */}
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
+      <div className="productArchive container-fluid">
+        <div className="row">
+          <div className="col-3 desktopFilter">
+            <ProductFilterLeftBar />
+          </div>
+          <div className="col-9">
+            <div className="productTiles row">
+              {/* ------------------------------ Mapping through products here --------------------- */}
+              {filteredProducts.map(product => {
+                return <ProductCard product={product} />
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }

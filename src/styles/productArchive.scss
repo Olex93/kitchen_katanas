@@ -9,6 +9,8 @@
   }
 
   .filterList {
+    max-width: 300px;
+
     p.filterListTitle {
       font-size: 1.125rem;
       font-weight: 700;
@@ -64,6 +66,7 @@
             margin: 0;
             font-size: 0.875rem;
             font-family: $serif-font;
+            padding-right: 40px;
           }
 
           input {

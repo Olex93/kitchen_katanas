@@ -8,6 +8,8 @@
     }
     .navWrapper {
         margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
         .navButton {
             background-color: transparent;
             border: none;
@@ -34,6 +36,10 @@
                     transition: all 0.2s;
                 }
             }
+        }
+
+        .cartIcon {
+            width: 50px;
         }
     }
 }

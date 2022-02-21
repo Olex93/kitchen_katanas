@@ -171,9 +171,23 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
  */
 
 const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
-  Promise.all(
-    products.map(product =>
-      // createPage is an action passed to createPages
+
+Promise.all(
+    products.map(product => {
+
+      let stripePriceId = 'No price ID'
+
+     if(product.attributes.length > 0) {
+      if ( product.attributes[0].options.length > 0 ) {
+        stripePriceId = product.attributes[0].options[0]
+        console.log(stripePriceId)
+      } else {
+        console.log('No price ID')
+      }
+     }
+      
+
+       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
@@ -190,12 +204,15 @@ const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
           // so our blog post template knows which blog post
           // the current page is (when you open it in a browser)
           id: product.id,
-
+          stripePriceId: stripePriceId
           // We also use the next and previous id's to query them and add links!
           // previousPostId: previous ? previous.id : null,
           // nextPostId: next ? next.id : null,
         },
       })
+
+    }
+     
     )
   )
 

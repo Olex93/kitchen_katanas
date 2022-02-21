@@ -10,6 +10,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -100,6 +101,30 @@ module.exports = {
         },
         // Array of strings with fields you'd like to create nodes for...
         fields: ["products", "products/categories", "products/attributes"],
+      },
+    },
+
+    {
+      resolve: `gatsby-plugin-use-shopping-cart`,
+      options: {
+        mode: "payment",
+        cartMode: "client-only",
+        stripePublicKey: process.env.GATSBY_STRIPE_PUBLISHABLE_KEY,
+        successUrl: "https://www.google.com", // url must start with http or https
+        cancelUrl: "http://localhost:8000/shopping-cart", // url must start with http or https
+        currency: "GBP",
+        allowedCountries: [ "GB" ],
+        billingAddressCollection: true,
+
+      },
+    },
+
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ["Price"],
+        secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
+        downloadFiles: false,
       },
     },
 

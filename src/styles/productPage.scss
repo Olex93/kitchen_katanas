@@ -15,6 +15,18 @@
   .headline {
     font-weight: 500;
   }
+  .strike {
+    text-decoration: line-through;
+    color: $platinum;
+  }
+  .salePrice {
+    color: $blood-red
+  }
+  .disclaimer {
+    font-size: 0.875rem;
+    line-height: normal;
+    font-family: $sans-font;
+  }
 
   h3,
   h2 {
@@ -54,6 +66,44 @@
                 color: $jungle-green
             }
         }
+      }
+    }
+  }
+
+  .internalLinks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    margin-right: 15px;
+  }
+
+  .fullWidthButton {
+    width: 100%;
+    border: none;
+    background-color: $brand-brown;
+    border: 2px solid $brand-brown;
+    color: $white;
+    font-weight: 600;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 50px;
+
+    &:hover, &:focus {
+      background-color: $white;
+      color: $jungle-green;
+
+      transition: all 0.2s;
+    }
+
+    &.checkout {
+      background-color: $jungle-green;
+      border-color: $jungle-green;
+
+      &:hover, &:focus {
+        background-color: $white;
+        color: $jungle-green;
       }
     }
   }

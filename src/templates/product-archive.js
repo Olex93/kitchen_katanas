@@ -3,15 +3,20 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/productArchive.scss"
 import ProductCard from "../components/ProductCard"
-import {
-  filterProductsGlobalState,
-  selectedFiltersGlobalState,
-} from "../store"
+import { filterProductsGlobalState, selectedFiltersGlobalState } from "../store"
 import { useRecoilState } from "recoil"
 import ProductFilterLeftBar from "../components/ProductFilterLeftBar"
 
+import CartOverview from "../components/CartOverview"
+import { loadStripe } from "@stripe/stripe-js"
+import { CartProvider } from "use-shopping-cart"
+const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
+
+
 const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
-  const [filteredProducts, setFilteredProducts] = useRecoilState(filterProductsGlobalState)
+  const [filteredProducts, setFilteredProducts] = useRecoilState(
+    filterProductsGlobalState
+  )
   const [selectedFilters] = useRecoilState(selectedFiltersGlobalState)
 
   //---------------- FILTER THE PRODUCTS USING THE SELECTED FILTERS GLOBAL ARRAY --------------
@@ -71,10 +76,21 @@ const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
           </div>
           <div className="col-9">
             <div className="productTiles row">
-              {/* ------------------------------ Mapping through products here --------------------- */}
-              {filteredProducts.map(product => {
-                return <ProductCard product={product} />
-              })}
+              {/* <CartProvider
+                mode="client-only"
+                stripe={stripePromise}
+                successUrl={`${window.location.origin}/kitchen-knives/`}
+                cancelUrl={`${window.location.origin}/kitchen-knives/`}
+                currency="GBP"
+                allowedCountries={["US", "GB", "CA"]}
+                billingAddressCollection={true}
+              > */}
+                {/* ------------------------------ Mapping through products here --------------------- */}
+                {filteredProducts.map(product => {
+                  return <ProductCard product={product} />
+                })}
+                {/* <CartOverview /> */}
+              {/* </CartProvider> */}
             </div>
           </div>
         </div>

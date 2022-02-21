@@ -11,6 +11,7 @@ export const selectedFiltersGlobalState = atom({
   default: [],
 });
 
+
 export const checkboxFiltersGlobalState = atom({
   key: "checkboxFiltersGlobalState",
   default: [

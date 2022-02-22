@@ -110,8 +110,8 @@ module.exports = {
         mode: "payment",
         cartMode: "client-only",
         stripePublicKey: process.env.GATSBY_STRIPE_PUBLISHABLE_KEY,
-        successUrl: "https://www.google.com", // url must start with http or https
-        cancelUrl: "http://localhost:8000/shopping-cart", // url must start with http or https
+        successUrl: "https://www.kitchenkatanas/order-details/", // url must start with http or https
+        cancelUrl: "https://www.kitchenkatanas/shopping-cart/", // url must start with http or https
         currency: "GBP",
         allowedCountries: [ "GB" ],
         billingAddressCollection: true,

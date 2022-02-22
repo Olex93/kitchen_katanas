@@ -41,5 +41,47 @@
         .cartIcon {
             width: 50px;
         }
+
+        .megaMenuWrapper {
+            display: inline;
+            
+            // &:hover, &:focus-within {
+            //     .megaMenu {
+            //         display: flex;
+            //     }
+            // }
+
+            .megaMenu {
+                position: absolute;
+                width: 100%;
+                max-width: 750px;
+                left: 0;
+                margin-top: 20px;
+                background-color: $platinum;
+                border-bottom: 1px solid $brand-brown;
+                padding: 40px 30px;
+                z-index: 999;
+                // display: none;
+
+
+                p.megaHeading {
+                    font-family: $sans-font;
+                    font-weight: bold;
+                }
+
+                ul.megaList {
+                    list-style: none;
+                    padding-left: 0;
+                    font-size: 0.875rem;
+                    li {
+                        line-height: 1.8rem;
+                        .megaLink {
+                            font-weight: 400;
+                            // font-family: $serif-font;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

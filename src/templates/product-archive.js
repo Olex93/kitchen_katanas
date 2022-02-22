@@ -6,18 +6,20 @@ import ProductCard from "../components/ProductCard"
 import { filterProductsGlobalState, selectedFiltersGlobalState } from "../store"
 import { useRecoilState } from "recoil"
 import ProductFilterLeftBar from "../components/ProductFilterLeftBar"
+import useWindowDimensions from "../utils/windowDimensions"
 
 import CartOverview from "../components/CartOverview"
 import { loadStripe } from "@stripe/stripe-js"
 import { CartProvider } from "use-shopping-cart"
+import ProductArchiveHeader from "../components/ProductArchiveHeader"
 const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY)
 
-
-const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
+const ProductIndex = ({ pageContext: { products, pageSlug, pageTitle } }) => {
   const [filteredProducts, setFilteredProducts] = useRecoilState(
     filterProductsGlobalState
   )
   const [selectedFilters] = useRecoilState(selectedFiltersGlobalState)
+  const { height, width } = useWindowDimensions()
 
   //---------------- FILTER THE PRODUCTS USING THE SELECTED FILTERS GLOBAL ARRAY --------------
   const filterProducts = () => {
@@ -70,27 +72,19 @@ const ProductIndex = ({ pageContext: { products, pageSlug } }) => {
     <Layout>
       <SEO title="All posts" />
       <div className="productArchive container-fluid">
+        <ProductArchiveHeader pageSlug={pageSlug} pageTitle={pageTitle}/>
         <div className="row">
-          <div className="col-3 desktopFilter">
-            <ProductFilterLeftBar />
-          </div>
-          <div className="col-9">
+          {width > 991 && (
+            <div className="col-3 desktopFilter">
+              <ProductFilterLeftBar />
+            </div>
+          )}
+          <div className="col-lg-9 col-md-10 col-12 offset-md-1 offset-lg-0">
             <div className="productTiles row">
-              {/* <CartProvider
-                mode="client-only"
-                stripe={stripePromise}
-                successUrl={`${window.location.origin}/kitchen-knives/`}
-                cancelUrl={`${window.location.origin}/kitchen-knives/`}
-                currency="GBP"
-                allowedCountries={["US", "GB", "CA"]}
-                billingAddressCollection={true}
-              > */}
-                {/* ------------------------------ Mapping through products here --------------------- */}
-                {filteredProducts.map(product => {
-                  return <ProductCard product={product} />
-                })}
-                {/* <CartOverview /> */}
-              {/* </CartProvider> */}
+              {/* ------------------------------ Mapping through products here --------------------- */}
+              {filteredProducts.map(product => {
+                return <ProductCard product={product} />
+              })}
             </div>
           </div>
         </div>

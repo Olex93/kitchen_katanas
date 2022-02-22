@@ -14,7 +14,7 @@ export default function ProductBreadcrumbs(props) {
         </li>
         <li className="breadcrumb-link">
           <Link className="breadcrumb-text" to={"/kitchen-knives/"}>
-            Kitchen Knives
+            Shop Kitchen Knives
           </Link>
         </li>
 

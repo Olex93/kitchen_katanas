@@ -241,6 +241,7 @@ async function createProductArchive({ products, gatsbyUtilities }) {
           context: {
             products: productCategory[1],
             pageSlug: productCategory[0],
+            pageTitle: productCategory[2]
           },
         })
       }
@@ -455,30 +456,30 @@ const categoriseProducts = products => {
   })
 
   return [
-    ["", products],
-    ["british-kitchen-knives", britishKnives],
-    ["german-kitchen-knives", germanKnives],
-    ["japanese-kitchen-knives", japaneseKnives],
-    ["chinese-kitchen-knives", chineseKnives],
-    ["handmade-kitchen-knives", handmadeKnives],
-    ["machine-made-kitchen-knives", machineMade],
-    ["featured-knives", featuredKnives],
-    ["boning-knives", boningKnives],
-    ["bread-knives", breadKnives],
-    ["carving-knives", carvingKnives],
-    ["chef-knives", chefKnives],
-    ["cleavers", cleavers],
-    ["fillet-knives", filletingKnives],
-    ["nakiri-knives", nakiriKnives],
-    ["santoku-knives", santokuKnives],
-    ["paring-knives", paringKnife],
-    ["peeling-knives", peelingKnives],
-    ["utility-knives", utilityKnives],
-    ["bunka-knives", bunkaKnives],
-    ["gyuto-knives", gyutoKnives],
-    ["kiritsuke-knives", kiritsukeKnives],
-    ["petty-knives", pettyKnives],
-    ["higonokami-knives", higonokamiKnives],
+    ["", products, "All Kitchen Knives"],
+    ["british-kitchen-knives", britishKnives, "British Kitchen Knives"],
+    ["german-kitchen-knives", germanKnives, "German Kitchen Knives"],
+    ["japanese-kitchen-knives", japaneseKnives, "Japanese Kitchen Knives"],
+    ["chinese-kitchen-knives", chineseKnives, "Chinese Kitchen Knives"],
+    ["handmade-kitchen-knives", handmadeKnives, "Handmade Kitchen Knives"],
+    ["machine-made-kitchen-knives", machineMade, "Machined Kitchen Knives"],
+    ["featured-knives", featuredKnives, "Featured Kitchen Knives"],
+    ["boning-knives", boningKnives, "Boning Knives"],
+    ["bread-knives", breadKnives, "Bread Knives"],
+    ["carving-knives", carvingKnives, "Carving Knives"],
+    ["chef-knives", chefKnives, "Chef Knives"],
+    ["cleavers", cleavers, "Cleavers"],
+    ["fillet-knives", filletingKnives, "Fillet Knives"],
+    ["nakiri-knives", nakiriKnives, "Nakiri Knives"],
+    ["santoku-knives", santokuKnives, "Santoku Knives"],
+    ["paring-knives", paringKnife, "Paring Knives"],
+    ["peeling-knives", peelingKnives, "Peeling Knives"],
+    ["utility-knives", utilityKnives, "Utility Knives"],
+    ["bunka-knives", bunkaKnives, "Bunka Knives"],
+    ["gyuto-knives", gyutoKnives, "Gyuto Knives"],
+    ["kiritsuke-knives", kiritsukeKnives, "Kiritsuke Knives"],
+    ["petty-knives", pettyKnives, "Petty Knives"],
+    ["higonokami-knives", higonokamiKnives, "Higonokami Knives"],
   ]
 }
 

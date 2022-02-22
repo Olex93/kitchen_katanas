@@ -21,7 +21,7 @@ export default function ProductCard(props) {
   return (
     <li className="col-12 col-md-6 col-lg-4 col-xl-3 mb-3" key={product.id}>
       <Link
-        to={`/kitchen-knives/${product.slug}`}
+        to={`/kitchen-knives/${product.slug}/`}
         itemProp="url"
         className="productLinkWrapper"
       >

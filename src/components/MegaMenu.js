@@ -3,12 +3,12 @@ import { Link } from "gatsby"
 import { BiRightArrowAlt } from "react-icons/bi"
 
 export default function MegaMenu(props) {
-  const { setMegaMenuOpen } = props
+  const { setIsComponentVisible } = props
 
 
 
   return (
-    <div className="megaMenuWrapper" onMouseLeave={() => setMegaMenuOpen(false)} >
+    <div className="megaMenuWrapper" onMouseLeave={() => setIsComponentVisible(false)} >
       <div className="row megaMenu">
         <div className="col-12 col-md-4">
           <ul className="megaList">

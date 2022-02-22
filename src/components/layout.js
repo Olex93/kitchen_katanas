@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import "../styles/nav.scss"
 import "../styles/global.scss"
@@ -6,9 +6,11 @@ import { useShoppingCart } from "use-shopping-cart"
 import {
   BiCart,
   BiRightArrowAlt,
-  BiDownArrowAlt
+  BiDownArrowAlt,
+  BiUpArrowAlt,
 } from "react-icons/bi"
 import MegaMenu from "./MegaMenu"
+import useComponentVisible from '../utils/useComponentVisible.ts'
 
 // const Layout = ({ isHomePage, children }) => {
 //   const {
@@ -28,7 +30,12 @@ import MegaMenu from "./MegaMenu"
 
 const Layout = ({ children }) => {
   const { cartCount } = useShoppingCart()
-  const [megaMenuOpen, setMegaMenuOpen] = useState(false)
+  // const [megaMenuOpen, setMegaMenuOpen] = useState(false)
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false)
+
+  const setVisible = () => {
+    setIsComponentVisible(true)
+  }
 
   return (
     <div className="container-fluid outerWrapper">
@@ -59,15 +66,23 @@ const Layout = ({ children }) => {
                 className="navButton"
                 activeClassName="active"
                 itemProp="url"
-                onMouseEnter={() => setMegaMenuOpen(true)}
+                onMouseEnter={() => setVisible()}
                 to="/kitchen-knives/"
               >
                 shop
+                {isComponentVisible ? (
+                  <BiUpArrowAlt size={20} style={{ marginLeft: 10 }} />
+                ) : (
+                  <BiDownArrowAlt size={20} style={{ marginLeft: 10 }} />
+                )}
               </Link>
 
-              {megaMenuOpen && (
-                <MegaMenu setMegaMenuOpen={setMegaMenuOpen}/>
-              )}
+              <div ref={ref} style={{display: 'inline'}}>
+                {isComponentVisible && (
+                  <MegaMenu isComponentVisible={isComponentVisible} setIsComponentVisible={setIsComponentVisible} />
+                )}
+              </div>
+
               <Link
                 to={"/kitchen-knife-101/"}
                 className="navButton "

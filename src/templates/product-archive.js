@@ -71,7 +71,7 @@ const ProductIndex = ({ pageContext: { products, pageSlug, pageTitle } }) => {
   return (
     <Layout>
       <SEO title="All posts" />
-      <div className="productArchive container-fluid">
+      <div className="productArchive container-fluid px-0">
         <ProductArchiveHeader pageSlug={pageSlug} pageTitle={pageTitle}/>
         <div className="row">
           {width > 991 && (

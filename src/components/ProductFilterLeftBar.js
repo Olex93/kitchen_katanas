@@ -7,7 +7,7 @@ export default function ProductFilterLeftBar() {
   const [checkboxState] = useRecoilState(checkboxFiltersGlobalState)
 
   return (
-    <div className="filterList">
+    <div className="filterList pl-3">
       <p className="filterListTitle">Handmade / Manufactured</p>
       <div className="filterCategoryWrapper">
         <ul className="filterList">

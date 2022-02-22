@@ -38,9 +38,9 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="container-fluid outerWrapper">
-      <nav className="top-navbar mb-5">
-        <div className="row">
+    <div className="container-fluid outerWrapper top-navbar ">
+      {/* <nav className="top-navbar mb-5"> */}
+        <div className="row mb-5">
           <div className="col-1 offset-md-1">
             <Link to="/" itemProp="url">
               <img
@@ -104,9 +104,9 @@ const Layout = ({ children }) => {
             </div>
           </div>
         </div>
-      </nav>
+      {/* </nav> */}
 
-      <main>{children}</main>
+      {children}
     </div>
   )
 }

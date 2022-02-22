@@ -20,7 +20,7 @@
     color: $platinum;
   }
   .salePrice {
-    color: $blood-red
+    color: $blood-red;
   }
   .disclaimer {
     font-size: 0.875rem;
@@ -38,7 +38,6 @@
 
   p {
     margin-bottom: 15px;
-
   }
 
   img,
@@ -61,10 +60,10 @@
         color: $raisin-black;
 
         &:first-child {
-            strong {
-                font-weight: 500!important;
-                color: $jungle-green
-            }
+          strong {
+            font-weight: 500 !important;
+            color: $jungle-green;
+          }
         }
       }
     }
@@ -90,7 +89,8 @@
     align-items: center;
     line-height: 50px;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background-color: $white;
       color: $jungle-green;
 
@@ -101,7 +101,8 @@
       background-color: $jungle-green;
       border-color: $jungle-green;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background-color: $white;
         color: $jungle-green;
       }
@@ -111,7 +112,7 @@
   .tagButton {
     background-color: $platinum;
     padding: 5px 10px;
-    margin: 5px ;
+    margin: 5px;
     line-height: normal;
     display: inline-flex;
     font-size: 0.875rem;
@@ -146,6 +147,9 @@
 
 @media (min-width: 992px) {
   .productPage {
+    #productInfo {
+      margin-top: -30px;
+    }
     .fixed-top-desktop {
       position: sticky;
       top: 50px;
@@ -166,7 +170,6 @@
     }
   }
 }
-
 
 @media screen and (min-width: 992px) and (max-height: 760px) {
   .productPage {

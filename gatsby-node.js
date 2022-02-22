@@ -32,7 +32,6 @@ exports.createPages = async gatsbyUtilities => {
   await createCategoryArchives({ categories, gatsbyUtilities })
 
   // console.log(products)
-
 }
 
 /**
@@ -40,16 +39,12 @@ exports.createPages = async gatsbyUtilities => {
  */
 
 const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
-
-Promise.all(
-
+  Promise.all(
     posts.map(({ previous, post, next }) => {
-      
       var relatedCategories = []
-      post.categories.nodes.map(category => {  
+      post.categories.nodes.map(category => {
         relatedCategories.push(category.name)
       })
-
 
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
@@ -72,11 +67,12 @@ Promise.all(
           // We also use the next and previous id's to query them and add links!
           previousPostId: previous ? previous.id : null,
           nextPostId: next ? next.id : null,
-          relatedCategories: relatedCategories
+          relatedCategories: relatedCategories,
         },
-      })}
-    )
-  )}
+      })
+    })
+  )
+}
 
 /**
  * This function creates creates the blog post archive
@@ -160,7 +156,7 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
           // etc
           categoryName: category.name,
           categoryLink: `${category.link}/`,
-          categoryDescription:category.description
+          categoryDescription: category.description,
         },
       })
     })
@@ -171,23 +167,20 @@ const createCategoryArchives = async ({ categories, gatsbyUtilities }) =>
  */
 
 const createIndividualProductPages = async ({ products, gatsbyUtilities }) =>
-
-Promise.all(
+  Promise.all(
     products.map(product => {
+      let stripePriceId = "No price ID"
 
-      let stripePriceId = 'No price ID'
-
-     if(product.attributes.length > 0) {
-      if ( product.attributes[0].options.length > 0 ) {
-        stripePriceId = product.attributes[0].options[0]
-        console.log(stripePriceId)
-      } else {
-        console.log('No price ID')
+      if (product.attributes.length > 0) {
+        if (product.attributes[0].options.length > 0) {
+          stripePriceId = product.attributes[0].options[0]
+          console.log(stripePriceId)
+        } else {
+          console.log("No price ID")
+        }
       }
-     }
-      
 
-       // createPage is an action passed to createPages
+      // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
@@ -204,23 +197,19 @@ Promise.all(
           // so our blog post template knows which blog post
           // the current page is (when you open it in a browser)
           id: product.id,
-          stripePriceId: stripePriceId
+          stripePriceId: stripePriceId,
           // We also use the next and previous id's to query them and add links!
           // previousPostId: previous ? previous.id : null,
           // nextPostId: next ? next.id : null,
         },
       })
-
-    }
-     
-    )
+    })
   )
 
 /**
  * This function creates creates the Product archive
  */
 async function createProductArchive({ products, gatsbyUtilities }) {
-
   const productCategories = await categoriseProducts(products)
 
   // These consts are for the commented out code below that chunkifies and paginates posts
@@ -228,91 +217,81 @@ async function createProductArchive({ products, gatsbyUtilities }) {
   // const productsChunkedIntoArchivePages = chunk(products, productsPerPage)
   // const totalPages = productsChunkedIntoArchivePages.length
 
-
   return Promise.all(
-
     productCategories.map(async (productCategory, index) => {
-
       // console.log(productCategory)
 
-      const getPagePath = (pageSlug) => {
-        if (pageSlug == '') {
-          return '/kitchen-knives/'    
-        } 
-        else {
-          return '/kitchen-knives/' + pageSlug + '/'
+      const getPagePath = pageSlug => {
+        if (pageSlug == "") {
+          return "/kitchen-knives/"
+        } else {
+          return "/kitchen-knives/" + pageSlug + "/"
         }
       }
 
-      if( productCategory[1].length > 0) {
+      if (productCategory[1].length > 0) {
         await gatsbyUtilities.actions.createPage({
           path: getPagePath(productCategory[0]),
-  
+
           // use the blog post archive template as the page component
           component: path.resolve(`./src/templates/product-archive.js`),
-  
+
           // `context` is available in the template as a prop and
           // as a variable in GraphQL.
           context: {
             products: productCategory[1],
-            pageSlug: productCategory[0]
+            pageSlug: productCategory[0],
           },
         })
-
       }
-    
     })
-
-
 
     //The below creates multpile product archive pages
     // productsChunkedIntoArchivePages.map(async (products, index) => {
-      // const pageNumber = index + 1
+    // const pageNumber = index + 1
 
-      // const getPagePath = pageNumber => {
-      //   if (pageNumber > 0 && pageNumber <= totalPages) {
-          // Since our homepage is our blog page
-          // we want the first page to be "/" and any additional pages
-          // to be numbered.
-          // "/blog/2" for example
-        //   return pageNumber === 1
-        //     ? `/kitchen-knives/`
-        //     : `/kitchen-knives/${pageNumber}/`
-        // }
+    // const getPagePath = pageNumber => {
+    //   if (pageNumber > 0 && pageNumber <= totalPages) {
+    // Since our homepage is our blog page
+    // we want the first page to be "/" and any additional pages
+    // to be numbered.
+    // "/blog/2" for example
+    //   return pageNumber === 1
+    //     ? `/kitchen-knives/`
+    //     : `/kitchen-knives/${pageNumber}/`
+    // }
 
-      //   return null
-      // }
+    //   return null
+    // }
 
-      // createPage is an action passed to createPages
-      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
-      // await gatsbyUtilities.actions.createPage({
-      //   path: getPagePath(pageNumber),
+    // createPage is an action passed to createPages
+    // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+    // await gatsbyUtilities.actions.createPage({
+    //   path: getPagePath(pageNumber),
 
-        // use the blog post archive template as the page component
-        // component: path.resolve(`./src/templates/product-archive.js`),
+    // use the blog post archive template as the page component
+    // component: path.resolve(`./src/templates/product-archive.js`),
 
-        // `context` is available in the template as a prop and
-        // as a variable in GraphQL.
-        // context: {
-          // the index of our loop is the offset of which posts we want to display
-          // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
-          // etc
-          // offset: index * productsPerPage,
+    // `context` is available in the template as a prop and
+    // as a variable in GraphQL.
+    // context: {
+    // the index of our loop is the offset of which posts we want to display
+    // so for page 1, 0 * 10 = 0 offset, for page 2, 1 * 10 = 10 posts offset,
+    // etc
+    // offset: index * productsPerPage,
 
-          // We need to tell the template how many posts to display too
-          // productsPerPage,
+    // We need to tell the template how many posts to display too
+    // productsPerPage,
 
-      //     nextPagePath: getPagePath(pageNumber + 1),
-      //     previousPagePath: getPagePath(pageNumber - 1),
-      //   },
-      // })
+    //     nextPagePath: getPagePath(pageNumber + 1),
+    //     previousPagePath: getPagePath(pageNumber - 1),
+    //   },
+    // })
     // })
   )
 }
 
-
-const categoriseProducts = (products) => {
-
+const categoriseProducts = products => {
   const allKnives = products
 
   const britishKnives = []
@@ -321,8 +300,9 @@ const categoriseProducts = (products) => {
   const chineseKnives = []
 
   const handmadeKnives = []
+  const machineMade = []
   const featuredKnives = []
-  
+
   const boningKnives = []
   const breadKnives = []
   const carvingKnives = []
@@ -338,12 +318,15 @@ const categoriseProducts = (products) => {
   const pettyKnives = []
   const higonokamiKnives = []
   const peelingKnives = []
-  const utilityKnives = [] 
-
+  const utilityKnives = []
+  const bunkaKnife = []
+  const gyutoKnife = []
+  const kiritsukeKnife = []
+  const pettyKnife = []
+  const higonokamiKnife = []
 
   products.forEach(product => {
     product.categories.forEach(category => {
-      
       switch (category.name) {
         case "British Knives":
           {
@@ -371,28 +354,35 @@ const categoriseProducts = (products) => {
             handmadeKnives.push(product)
           }
           break
+
+        case "Machine made":
+          {
+            machineMade.push(product)
+          }
+          break
+
         case "Featured":
           {
             featuredKnives.push(product)
           }
           break
 
-        case "Boning Knife":
+        case "Boning Knives":
           {
             boningKnives.push(product)
           }
           break
-        case "Bread Knife":
+        case "Bread Knives":
           {
             breadKnives.push(product)
           }
           break
-        case "Carving Knife":
+        case "Carving Knives":
           {
             carvingKnives.push(product)
           }
           break
-        case "Chef Knife":
+        case "Chef Knives":
           {
             chefKnives.push(product)
           }
@@ -402,7 +392,7 @@ const categoriseProducts = (products) => {
             cleavers.push(product)
           }
           break
-        case "Filleting Knife":
+        case "Filleting Knives":
           {
             filletingKnives.push(product)
           }
@@ -412,15 +402,14 @@ const categoriseProducts = (products) => {
             nakiriKnives.push(product)
           }
           break
-        case "Paring Knife": 
-        {
-          paringKnife.push(product)
-        }
+        case "Paring Knives":
+          {
+            paringKnife.push(product)
+          }
           break
-        case "Peeling Knife":
+        case "Peeling Knives":
           {
             peelingKnife.push(product)
-
           }
           break
         case "Santoku":
@@ -428,22 +417,69 @@ const categoriseProducts = (products) => {
             santokuKnives.push(product)
           }
           break
-        case "Utility Knife":
+        case "Utility Knives":
           {
             utilityKnife.push(product)
           }
           break
-         default : {
+        case "Bunka Knives":
+          {
+            bunkaKnife.push(product)
+          }
+          break
+        case "Gyuto Knives":
+          {
+            gyutoKnife.push(product)
+          }
+          break
+        case "Kiritsuke":
+          {
+            kiritsukeKnife.push(product)
+          }
+          break
+        case "Petty Knives":
+          {
+            pettyKnife.push(product)
+          }
+          break
+        case "Higonokami":
+          {
+            higonokamiKnife.push(product)
+          }
+          break
+        default: {
           console.log(category.name + " category not catered for in node js")
         }
       }
-
-
     })
-  });
+  })
 
-
-  return ([['', products], ['british-knives', britishKnives], ['german-knives', germanKnives], ['japanese-knives', japaneseKnives], ['chinese-knives', chineseKnives], ['handmade-knives', handmadeKnives], ['featured-knives' ,featuredKnives], ['boning-knives', boningKnives], ['bread-knives', breadKnives], ['carving-knives', carvingKnives], ['chef-knives', chefKnives], ['cleavers', cleavers], ['fillet-knives', filletingKnives], ['nakiri-knives', nakiriKnives], ['santoku-knives', santokuKnives], ['paring-knives', paringKnife], ['peeling-knives', peelingKnives], ['utility-knives', utilityKnives], ['bunka-knives', bunkaKnives], ['bunka-knives', gyutoKnives], ['kiritsuke-knives', kiritsukeKnives], ['petty-knives', pettyKnives], ['higonokami-knives' ,higonokamiKnives]])
+  return [
+    ["", products],
+    ["british-kitchen-knives", britishKnives],
+    ["german-kitchen-knives", germanKnives],
+    ["japanese-kitchen-knives", japaneseKnives],
+    ["chinese-kitchen-knives", chineseKnives],
+    ["handmade-kitchen-knives", handmadeKnives],
+    ["machine-made-kitchen-knives", machineMade],
+    ["featured-knives", featuredKnives],
+    ["boning-knives", boningKnives],
+    ["bread-knives", breadKnives],
+    ["carving-knives", carvingKnives],
+    ["chef-knives", chefKnives],
+    ["cleavers", cleavers],
+    ["fillet-knives", filletingKnives],
+    ["nakiri-knives", nakiriKnives],
+    ["santoku-knives", santokuKnives],
+    ["paring-knives", paringKnife],
+    ["peeling-knives", peelingKnives],
+    ["utility-knives", utilityKnives],
+    ["bunka-knives", bunkaKnives],
+    ["gyuto-knives", gyutoKnives],
+    ["kiritsuke-knives", kiritsukeKnives],
+    ["petty-knives", pettyKnives],
+    ["higonokami-knives", higonokamiKnives],
+  ]
 }
 
 /**
@@ -470,7 +506,7 @@ async function getPosts({ graphql, reporter }) {
             uri
             categories {
               nodes {
-               name
+                name
               }
             }
           }

@@ -17,22 +17,27 @@ export const checkboxFiltersGlobalState = atom({
   default: [
     {
       category: 'Knife Type',
-      filterItem: 'Boning Knife',
+      filterItem: 'Boning Knives',
       checked: false
     },
     {
       category: 'Knife Type',
-      filterItem: 'Bread Knife',
+      filterItem: 'Bread Knives',
       checked: false
     },
     {
       category: 'Knife Type',
-      filterItem: 'Carving Knife',
+      filterItem: 'Bunka Knives',
       checked: false
     },
     {
       category: 'Knife Type',
-      filterItem: 'Chef Knife',
+      filterItem: 'Carving Knives',
+      checked: false
+    },
+    {
+      category: 'Knife Type',
+      filterItem: 'Chef Knives',
       checked: false
     },
     {
@@ -42,7 +47,22 @@ export const checkboxFiltersGlobalState = atom({
     },
     {
       category: 'Knife Type',
-      filterItem: 'Filleting Knife',
+      filterItem: 'Filleting Knives',
+      checked: false
+    },
+    {
+      category: 'Knife Type',
+      filterItem: 'Gyuto Knives',
+      checked: false
+    },
+    {
+      category: 'Knife Type',
+      filterItem: 'Higonokami Knives',
+      checked: false
+    },
+    {
+      category: 'Knife Type',
+      filterItem: 'Kiritsuke Knives',
       checked: false
     },
     {
@@ -52,12 +72,17 @@ export const checkboxFiltersGlobalState = atom({
     },
     {
       category: 'Knife Type',
-      filterItem: 'Paring Knife',
+      filterItem: 'Paring Knives',
       checked: false
     },
     {
       category: 'Knife Type',
-      filterItem: 'Peeling Knife',
+      filterItem: 'Peeling Knives',
+      checked: false
+    },
+    {
+      category: 'Knife Type',
+      filterItem: 'Petty Knives',
       checked: false
     },
     {
@@ -67,7 +92,7 @@ export const checkboxFiltersGlobalState = atom({
     },
     {
       category: 'Knife Type',
-      filterItem: 'Utility Knife',
+      filterItem: 'Utility Knives',
       checked: false
     },
 
@@ -155,6 +180,12 @@ export const checkboxFiltersGlobalState = atom({
     {
       category: 'Manufacture Process',
       filterItem: 'Handmade',
+      checked: false
+    },
+
+    {
+      category: 'Manufacture Process',
+      filterItem: 'Machine made',
       checked: false
     },
 

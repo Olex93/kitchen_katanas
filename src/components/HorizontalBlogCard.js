@@ -26,8 +26,8 @@ export default function FeaturedBlogCard(props) {
       <div className="container-fluid">
 
         <div className={`row p-0 blogRow ${props.index % 2 == 0 ? "justify-content-start" : "justify-content-end"}`}>
-        {props.index % 2 == 0  && 
-          <div className="col-md-5 pb-md-5 pl-md-0 image-wrapper p-0">
+        {/* {props.index % 2 == 0  &&  */}
+          <div className="col-md-5 col-lg-4  pl-md-0 image-wrapper p-md-0">
             {props.post.featuredImage && (
               <GatsbyImage
                 className="blogImg"
@@ -38,15 +38,16 @@ export default function FeaturedBlogCard(props) {
                 height={200}
               />
             )}
-          </div>}
-          <div className="col-md-7 content-col p-md-0 mt-md-2">
-            <article itemScope itemType="http://schema.org/Article">
-              <header>
+          </div>
+          {/* } */}
+          <div className="col-md-7 col-lg-8 content-col p-md-0">
+            <article className="px-md-5 py-md-4" style={{height: '100%'}} itemScope itemType="http://schema.org/Article">
+              <header >
                 <p className="published">
                   <span>{`${props.post.author.node.firstName} ${props.post.author.node.lastName}`}</span>
                   , <span>{props.post.date}</span>
                 </p>
-                <h3 className="title">
+                <h3 className="title pt-md-2">
                   <Link to={postLink} itemProp="url">
                     <span itemProp="headline">{parse(title)}</span>
                   </Link>
@@ -88,8 +89,8 @@ export default function FeaturedBlogCard(props) {
               />
             </article>
           </div>
-          {props.index % 2 !== 0 && 
-          <div className="col-md-5 pb-md-5 pr-md-0 image-wrapper p-0">
+          {/* {props.index % 2 !== 0 && 
+          <div className="col-md-5 pr-md-0 image-wrapper p-0">
             {props.post.featuredImage && (
               <GatsbyImage
                 className="blogImg"
@@ -100,7 +101,7 @@ export default function FeaturedBlogCard(props) {
                 height={200}
               />
             )}
-          </div>}
+          </div>} */}
 
         </div>
 

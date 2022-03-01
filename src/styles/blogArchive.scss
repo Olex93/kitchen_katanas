@@ -81,6 +81,11 @@
             p:first-child {
                 display: inline;
             }
+            .continue-reading-font {
+                font-family: $sans-font;
+                color: $jungle-green;
+                font-weight: 500;
+            }
             .continue-reading {
                 color: $jungle-green;
                 &:hover, &:focus {

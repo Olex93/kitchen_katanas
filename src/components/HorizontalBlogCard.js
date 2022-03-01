@@ -54,7 +54,7 @@ export default function FeaturedBlogCard(props) {
                 </h3>
               </header>
               <section className="article-excerpt" itemProp="description">
-                {parse(props.post.excerpt)}<span>... Continue reading <Link to={postLink} className="continue-reading">{`${props.post.title}`}</Link></span>
+                {parse(props.post.excerpt)}<span className="continue-reading-font">... Continue reading: <Link to={postLink} className="continue-reading">{`${props.post.title}`}</Link></span>
                 <div class="cardFlexBox">
                   <Link to={postLink} itemProp="url">
                     <button className="readArticle">

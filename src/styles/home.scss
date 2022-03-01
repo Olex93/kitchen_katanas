@@ -1,2 +1,233 @@
-.intro {
+@import "./color.scss";
+@import "./typography.scss";
+
+h1.homeTitle {
+  font-size: 1.25rem;
+  color: $blood-red;
+}
+
+.standfirst {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+}
+.readArticle.homeCTAbutton {
+    font-size: 1.125rem;
+    padding: 0px 10px;
+    border: 2px solid $brand-brown;
+
+    svg {
+        margin-left: 10px
+    }
+}
+
+#carouselExampleIndicators {
+  position: static;
+}
+
+.carousel-indicators {
+  bottom: 20px;
+  // top: 275px;
+
+  li {
+    background-color: $brand-brown;
+  }
+}
+
+.blog-content-list.homepage {
+  .blogs-list {
+    max-height: 415px;
+    overflow: auto;
+  }
+
+  .blogLi {
+    margin-bottom: 0;
+    margin-right: 30px;
+  }
+
+  .mostPopular {
+    background-color: $platinum;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .carouselControls {
+      .carousel-control-next,
+      .carousel-control-prev {
+        position: absolute;
+        right: -5px;
+        height: 40px;
+        width: 40px;
+        background-color: $blood-red;
+        opacity: 1;
+        // border: 1px solid $white;
+
+        .carousel-control-next-icon,
+        .carousel-control-prev-icon {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-image: none;
+        }
+
+        &:hover,
+        &:focus {
+          background-color: $brand-brown;
+          border-color: $brand-brown;
+        }
+      }
+
+      .carousel-control-next {
+        top: -20px;
+      }
+
+      .carousel-control-prev {
+        top: 22px;
+        left: unset;
+        transform: rotate(180deg);
+      }
+    }
+
+    .carousel-inner {
+      .productCardWrapper {
+        &:hover,
+        &:focus,
+        &:focus-within {
+          .productCardButton {
+            background-color: $brand-brown;
+            border-color: $brand-brown;
+          }
+        }
+
+        .gatsbyImage {
+          height: 300px;
+          background-color: $white;
+          transition: all 0.2s;
+          padding: 10px;
+        }
+        .productCardHeader {
+          margin-bottom: 30px;
+          font-family: $serif-font;
+          font-weight: 500;
+          height: 60px;
+        }
+
+        .productCardButton {
+          position: absolute;
+          bottom: 30px;
+          left: 20px;
+          font-family: $sans-font;
+          border: none;
+          background-color: $jungle-green;
+          color: $white;
+          padding: 0px 10px;
+          font-size: 1rem;
+          vertical-align: middle;
+          opacity: 0;
+          transition: all 0.3s;
+          border: 2px solid $jungle-green;
+          box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
+
+          &:hover,
+          &:focus {
+            background-color: $brand-brown;
+            border-color: $brand-brown;
+          }
+
+          svg {
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .carousel-item.active {
+        .productCardWrapper {
+          .productCardButton {
+            opacity: 1;
+            transition: all 0.3s;
+          }
+        }
+      }
+    }
+  }
+
+  .allArticles {
+    background-color: $platinum;
+    margin-left: 25px;
+
+    .blogRow {
+      .content-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+
+        article {
+          background-color: $white;
+
+          .published {
+            margin-bottom: 0;
+          }
+
+          .title {
+            margin-bottom: 10px;
+
+            a {
+              font-family: $serif-font;
+              font-size: 1.25rem;
+              font-weight: 500;
+              line-height: normal;
+            }
+          }
+
+          .article-excerpt {
+            margin: 0;
+            font-family: $sans-font;
+
+            .category-button {
+              display: none;
+            }
+
+            .continue-reading-font {
+              display: none;
+            }
+
+            .cardFlexBox {
+                .readArticle {
+                    background-color: $jungle-green;
+                    border-color: $jungle-green;
+
+                    &:hover, &:focus {
+                        background-color: $brand-brown;
+                        border-color: $brand-brown;
+                    }
+                }
+            }
+          }
+        }
+      }
+
+      .image-wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-content-list.homepage {
+    .allArticles {
+      .blogRow {
+        .image-wrapper {
+          display: block !important;
+        }
+
+        .content-col {
+          flex: 0 0 66.666667%;
+          max-width: 66.666667%;
+        }
+      }
+    }
+  }
 }

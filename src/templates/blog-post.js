@@ -104,7 +104,7 @@ const BlogPostTemplate = (
                                   aria-haspopup="true"
                                   aria-expanded="false"
                                 >
-                                  Categories
+                                  Blog Categories
                                 </a>
 
                                 <div

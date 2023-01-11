@@ -81,6 +81,11 @@
             p:first-child {
                 display: inline;
             }
+            .continue-reading-font {
+                font-family: $sans-font;
+                color: $jungle-green;
+                font-weight: 500;
+            }
             .continue-reading {
                 color: $jungle-green;
                 &:hover, &:focus {
@@ -93,7 +98,7 @@
             margin-bottom: 50px;
             .content-col {
                 article {
-                    background-color: $white;
+                    background-color: $platinum;
                     padding: 20px;
                 }
             }
@@ -156,7 +161,7 @@
 
         .shareButtons {
             position: absolute;
-            top: 5px;
+            top: 10px;
             right: 0;
             width: unset;
         }

@@ -10,6 +10,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+
 module.exports = {
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -36,7 +37,7 @@ module.exports = {
         url:
           process.env.WPGRAPHQL_URL ||
           `https://app-6060d325c1ac181868f8defd.closte.com/graphql`,
-        useACF: true,
+          useACF: true,
       },
     },
 
@@ -95,14 +96,38 @@ module.exports = {
       options: {
         // Base URL of WordPress site
         api: "app-6060d325c1ac181868f8defd.closte.com",
-        // true if using https. false otherwise.
-        https: true,
+        verbose: true,
+        https:true,
         api_keys: {
           consumer_key: process.env.WOO_CONSUMER_KEY,
           consumer_secret: process.env.WOO_CONSUMER_SECRET,
         },
         // Array of strings with fields you'd like to create nodes for...
         fields: ["products", "products/categories", "products/attributes"],
+      },
+    },
+
+    {
+      resolve: `gatsby-plugin-use-shopping-cart`,
+      options: {
+        mode: "payment",
+        cartMode: "client-only",
+        stripePublicKey: process.env.GATSBY_STRIPE_PUBLISHABLE_KEY,
+        successUrl: "https://www.kitchenkatanas/order-details/", // url must start with http or https
+        cancelUrl: "https://www.kitchenkatanas/shopping-cart/", // url must start with http or https
+        currency: "GBP",
+        allowedCountries: [ "GB" ],
+        billingAddressCollection: true,
+
+      },
+    },
+
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ["Price"],
+        secretKey: process.env.GATSBY_STRIPE_SECRET_KEY,
+        downloadFiles: false,
       },
     },
 

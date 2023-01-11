@@ -8,8 +8,9 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@pasdo501/gatsby-source-woocommerce": "^0.14.3",
+    "@pasdo501/gatsby-source-woocommerce": "0.14.3",
     "@popperjs/core": "^2.9.1",
+    "@stripe/stripe-js": "^1.23.0",
     "@wordpress/block-library": "^2.27.0",
     "bootstrap": "^4.6.0",
     "framer-motion": "^4.1.4",
@@ -26,7 +27,9 @@
     "gatsby-plugin-sass": "^4.0.2",
     "gatsby-plugin-sharp": "^2.14.3",
     "gatsby-plugin-sitemap": "^4.1.0",
+    "gatsby-plugin-use-shopping-cart": "0.0.1",
     "gatsby-source-filesystem": "^2.11.1",
+    "gatsby-source-stripe": "^4.0.0",
     "gatsby-source-wordpress": "^4.0.0",
     "gatsby-transformer-sharp": "^2.12.1",
     "html-react-parser": "^1.1.1",
@@ -43,8 +46,10 @@
     "react-icons": "^4.2.0",
     "react-share": "^4.4.0",
     "react-slick": "^0.28.1",
+    "recoil": "^0.6.1",
     "sass": "^1.32.8",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "use-shopping-cart": "^3.0.5"
   },
   "devDependencies": {
     "@netlify/plugin-sitemap": "^0.8.1",

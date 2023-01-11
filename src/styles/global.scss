@@ -22,6 +22,43 @@ html {
     }
 }
 
+.breadcrumb-list {
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb-dropdown {
+    background-color: $platinum;
+    padding: 15px;
+    margin-left: -15px;
+    border: none;
+    box-shadow: none;
+    height: 0;
+    transition: all 0.2s;
+    border-radius: 0;
+    border-bottom: 1px solid $brand-brown;
+    margin-top: 15px;
+    &.show {
+      height: unset;
+      transition: all 0.2s;
+      ul {
+        li {
+          opacity: 1;
+          transition: all 0.2s;
+        }
+      }
+    }
+    ul {
+      border: none;
+      padding-left: 0;
+      li {
+        list-style: none;
+        margin-left: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+
 button.readArticle {
     background: $brand-brown;
     color: $white;
@@ -31,9 +68,9 @@ button.readArticle {
     border: 2px solid $brand-brown;
     &:hover,
     &:focus {
-        background-color: $white;
-        border: 2px solid $brand-brown;
-        color: $brand-brown;
+        background-color: $jungle-green;
+        border: 2px solid $jungle-green;
+        color: $white;
         transition: all 0.2s;
     }
 }

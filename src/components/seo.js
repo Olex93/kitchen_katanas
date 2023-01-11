@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
+import React, {useState} from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
@@ -35,7 +35,8 @@ const SEO = (props, { description, meta }) => {
   // const defaultTitle = wp.generalSettings?.title
   const title = props.title
   const featuredImage = props.featuredImage
-  
+
+
   return (
     <Helmet htmlAttributes={{lang: "en"}}>
 
@@ -50,8 +51,8 @@ const SEO = (props, { description, meta }) => {
       <meta name="og:image" content={`https://www.kitchenkatanas.co.uk${featuredImage}`} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
-      <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
-      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+      {/* <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" /> */}
 
       
       
@@ -78,6 +79,34 @@ const SEO = (props, { description, meta }) => {
                   "position": 3,
                   "name": "${props.post.categories.nodes[0].name}/",
                   "item": "https://kitchen-katanas.co.uk${props.post.categories.nodes[0].link}/"
+              }]
+            }] 
+          `}
+        </script>
+      }
+
+      {props.product &&
+        <script type="application/ld+json">
+          {`
+            [{
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://kitchen-katanas.co.uk"
+                },{
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Kitchen Knives",
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knives/"
+                },{
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "${props.primaryProductCategory.name}",
+                  "item": "https://kitchen-katanas.co.uk/kitchen-knives/${props.primaryProductCategory.slug}/"
               }]
             }] 
           `}

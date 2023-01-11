@@ -17,6 +17,9 @@ module.exports = {
    * Gatsby has a rich ecosystem of plugins.
    * If you need any more you can search here: https://www.gatsbyjs.com/plugins/
    */
+   siteMetadata: {
+    siteUrl: `https://www.kitchenkatanas.co.uk`,
+  },
   plugins: [
     {
       /**
@@ -108,6 +111,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     // `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-preact`,
+    `gatsby-plugin-sitemap`,
 
 
     {

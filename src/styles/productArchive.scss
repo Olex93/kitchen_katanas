@@ -1,0 +1,80 @@
+@import "./color.scss";
+@import "./typography.scss";
+
+.productArchive {
+  background-color: $white;
+
+  .productTiles {
+    list-style: none;
+  }
+
+  .filterList {
+    max-width: 300px;
+
+    p.filterListTitle {
+      font-size: 1.125rem;
+      font-weight: 700;
+      font-family: $sans-font;
+      margin-bottom: 5px;
+      // text-transform: lowercase;
+      color: $jungle-green;
+      padding-bottom: 5px;
+    }
+
+    .filterCategoryWrapper {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 25px;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        cursor: pointer;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $platinum;
+        border-radius: 0px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        background: $brand-brown;
+        transition: all 0.2s;
+
+        &:hover {
+          background: $blood-red;
+          transition: all 0.2s;
+        }
+      }
+
+      ul.filterList {
+        list-style: none;
+        width: 100%;
+        position: relative;
+        padding-left: 0;
+        // margin-right: 30px;
+        margin-bottom: 0;
+
+        li.filterListItem {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid $platinum;
+          margin-right: 5px;
+
+          label {
+            margin: 0;
+            font-size: 0.875rem;
+            font-family: $serif-font;
+            padding-right: 40px;
+          }
+
+          input {
+            position: absolute;
+            right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
